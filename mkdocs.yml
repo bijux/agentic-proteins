@@ -1,0 +1,80 @@
+site_name: agentic proteins
+site_url: https://bijux.github.io/agentic-proteins/
+repo_name: bijux/agentic-proteins
+repo_url: https://github.com/bijux/agentic-proteins
+
+docs_dir: docs
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.sections
+    - search.highlight
+    - content.code.copy
+    - navigation.footer
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate
+      primary: teal
+      accent: lime
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+  logo: assets/bijux_logo_hq.png
+  favicon: assets/bijux_icon.png
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Overview: overview/index.md
+      - Limits: overview/limits.md
+  - Concepts:
+      - Terminology: concepts/terminology.md
+      - Agent: concepts/agent.md
+      - Plan: concepts/plan.md
+      - Candidate: concepts/candidate.md
+      - Run: concepts/run.md
+      - Artifact: concepts/artifact.md
+      - Confidence: concepts/confidence.md
+  - Architecture:
+      - Architecture: architecture/architecture.md
+      - Agents: architecture/agents.md
+      - Planning: architecture/planning.md
+      - Execution: architecture/execution.md
+      - Evaluation: architecture/evaluation.md
+      - Observability: architecture/observability.md
+  - Execution Model:
+      - Execution Model: execution/execution-model.md
+      - Design Loop: execution/design-loop.md
+  - Evaluation:
+      - Selection: evaluation/selection.md
+  - Artifacts:
+      - Provenance: artifact/provenance.md
+  - CLI Reference:
+      - CLI Spec: cli/cli.md
+  - Workflows:
+      - CLI Workflows: workflows/cli-workflows.md
+  - Development:
+      - Development: development/index.md
+      - Extension: development/extension.md
+
+strict: true
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true
+  - tables
+  - def_list

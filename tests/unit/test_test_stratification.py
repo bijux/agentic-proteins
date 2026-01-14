@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright © 2025 Bijan Mousavi
+
+from __future__ import annotations
+
+import ast
+from pathlib import Path
+
+
+def _iter_test_files(root: Path) -> list[Path]:
+    if not root.exists():
+        return []
+    return [path for path in root.rglob("test_*.py") if path.is_file()]
+
+
+def test_unit_tests_do_not_import_execution() -> None:
+    root = Path(__file__).resolve().parents[1] / "unit"
+    for path in _iter_test_files(root):
+        tree = ast.parse(path.read_text(), filename=str(path))
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                names = [alias.name for alias in node.names]
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                names = [node.module]
+            else:
+                continue
+            for name in names:
+                if name.startswith("agentic_proteins.execution"):
+                    raise AssertionError(
+                        f"Unit tests may not import execution modules: {path}"
+                    )
+
+
+def test_e2e_tests_use_local_executor_only() -> None:
+    root = Path(__file__).resolve().parents[1] / "e2e"
+    for path in _iter_test_files(root):
+        content = path.read_text()
+        if "agentic_proteins.execution.runtime.executor import" in content:
+            for line in content.splitlines():
+                if "agentic_proteins.execution.runtime.executor import" in line:
+                    if "LocalExecutor" not in line or "Executor" in line.replace("LocalExecutor", ""):
+                        raise AssertionError(
+                            f"E2E tests must import LocalExecutor only: {path}"
+                        )
+        if "agentic_proteins.execution.runtime.executor.Executor" in content:
+            raise AssertionError(f"E2E tests must not use Executor directly: {path}")
+
+
+def test_no_markdown_in_src_tree() -> None:
+    root = Path(__file__).resolve().parents[2]
+    src_dir = root / "src"
+    md_files = list(src_dir.rglob("*.md"))
+    if md_files:
+        raise AssertionError(f"Markdown files must live in docs/: {md_files[:3]}")

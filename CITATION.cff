@@ -1,0 +1,8 @@
+cff-version: 1.2.0
+title: Agentic Proteins
+version: 0.1.0
+doi: 10.0000/placeholder
+url: https://github.com/bijux/agentic-proteins
+authors:
+  - family-names: Mousavi
+    given-names: Bijan
