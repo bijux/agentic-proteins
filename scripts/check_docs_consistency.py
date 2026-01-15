@@ -15,28 +15,23 @@ DOCS_DIR = ROOT / "docs"
 SRC_DIR = ROOT / "src" / "agentic_proteins"
 
 MODULE_RE = re.compile(r"agentic_proteins\.[A-Za-z0-9_\.]+")
-SRC_PATH_RE = re.compile(r"src/agentic_proteins/[A-Za-z0-9_\-/\.]+")
+SRC_PATH_RE = re.compile(r"(src/agentic_proteins|tests)/[A-Za-z0-9_\-/\.]+")
 MKDOCS_RE = re.compile(r"([A-Za-z0-9_./-]+\.md)")
-REQUIRED_MODULE_DOCS = {
-    "agents": "concepts/agent.md",
-    "contracts": "architecture/architecture.md",
-    "core": "architecture/architecture.md",
-    "design_loop": "execution/design-loop.md",
-    "domain": "evaluation/selection.md",
-    "execution": "execution/execution-model.md",
-    "interfaces": "cli/cli.md",
-    "memory": "architecture/architecture.md",
-    "providers": "architecture/architecture.md",
-    "registry": "architecture/architecture.md",
-    "report": "evaluation/selection.md",
-    "runtime": "architecture/architecture.md",
-    "state": "artifact/provenance.md",
-    "tools": "execution/execution-model.md",
-    "validation": "architecture/architecture.md",
-}
 FUTURE_WORDS = re.compile(
-    r"\b(will|planned|future|soon|upcoming|later|tbd)\b", re.IGNORECASE
+    r"\b(will|planned|future|soon|upcoming|later|tbd|eventually)\b", re.IGNORECASE
 )
+FRONT_MATTER_FIELDS = ("**Scope:**", "**Audience:**", "**Guarantees:**", "**Non-Goals:**")
+ALLOWED_SECTION_ORDER = [
+    "Overview",
+    "Contracts",
+    "Invariants",
+    "Failure Modes",
+    "Extension Points",
+    "Exit Criteria",
+]
+ALLOWED_SECTIONS = set(ALLOWED_SECTION_ORDER)
+CODE_REF_RE = re.compile(r"(src/agentic_proteins|tests)/[A-Za-z0-9_./-]+\.py")
+SECURITY_WORDS = re.compile(r"\b(security|sandbox|isolation|trust)\b", re.IGNORECASE)
 
 
 def _module_index() -> set[str]:
@@ -91,13 +86,10 @@ def main() -> int:
                     f"index_only_dir: {path.relative_to(DOCS_DIR)}"
                 )
 
-    for module, doc_path in REQUIRED_MODULE_DOCS.items():
-        if not (DOCS_DIR / doc_path).exists():
-            failures.append(f"missing_module_doc: {module} -> {doc_path}")
-
+    allow_non_lowercase = set()
     for doc in sorted(DOCS_DIR.rglob("*.md")):
         rel = doc.relative_to(DOCS_DIR)
-        if rel.name != rel.name.lower():
+        if rel.name != rel.name.lower() and rel.name not in allow_non_lowercase:
             failures.append(f"non_lowercase_doc: {rel}")
         if rel not in nav_refs:
             failures.append(f"orphan_doc: {rel}")
@@ -109,9 +101,48 @@ def main() -> int:
         if FUTURE_WORDS.search(normalized):
             failures.append(f"future_language: {rel_from_root}")
 
+        lines = text.splitlines()
+        if not lines or not lines[0].startswith("# "):
+            failures.append(f"missing_title: {rel_from_root}")
+        else:
+            title = lines[0][2:].strip()
+            if title != rel.stem:
+                failures.append(f"title_mismatch: {rel_from_root}")
+        for idx, field in enumerate(FRONT_MATTER_FIELDS, start=2):
+            if len(lines) <= idx or not lines[idx].strip().startswith(field):
+                failures.append(f"missing_front_matter: {rel_from_root}")
+                break
+        if not any("Why:" in line for line in lines[:50]):
+            failures.append(f"missing_why_line: {rel_from_root}")
+
+        for line in lines:
+            if line.startswith("###"):
+                failures.append(f"section_depth_exceeded: {rel_from_root}")
+        for line in lines:
+            if line.startswith("## "):
+                section = line[3:].strip()
+                if section not in ALLOWED_SECTIONS:
+                    failures.append(f"unknown_section: {section} in {rel_from_root}")
+
+        sections = [line[3:].strip() for line in lines if line.startswith("## ")]
+        if sections and sections != ALLOWED_SECTION_ORDER:
+            failures.append(f"section_order_mismatch: {rel_from_root}")
+        if not sections or sections[-1] != "Exit Criteria":
+            failures.append(f"missing_exit_criteria: {rel_from_root}")
+        if len(lines) > 300:
+            failures.append(f"doc_too_long: {rel_from_root}")
+
+        if not CODE_REF_RE.search(text):
+            failures.append(f"missing_code_ref: {rel_from_root}")
+        if rel.parts[0] != "security":
+            for line in lines:
+                if "docs/security/" in line:
+                    continue
+                if SECURITY_WORDS.search(line):
+                    failures.append(f"security_word_outside_security_docs: {rel_from_root}")
+                    break
+
         module_refs = MODULE_RE.findall(text)
-        if not module_refs:
-            failures.append(f"missing_module_ref: {rel_from_root}")
 
         for ref in module_refs:
             ref = ref.rstrip(".,);:")
@@ -124,6 +155,15 @@ def main() -> int:
         for path_ref in SRC_PATH_RE.findall(text):
             if not _path_exists(path_ref):
                 failures.append(f"missing_path_ref: {path_ref} in {rel_from_root}")
+
+    test_text = "\n".join(
+        p.read_text() for p in (ROOT / "tests").rglob("*.py")
+    )
+    for doc in sorted(DOCS_DIR.rglob("*.md")):
+        text = doc.read_text()
+        for match in CODE_REF_RE.findall(text):
+            if match.startswith("src/agentic_proteins") and match not in test_text:
+                failures.append(f"doc_without_tests: {doc.relative_to(ROOT)}")
 
     if failures:
         for failure in failures:

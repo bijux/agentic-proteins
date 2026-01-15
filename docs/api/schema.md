@@ -1,31 +1,27 @@
-# HTTP API Schema
+# schema
 
-The API schema is defined in `agentic_proteins.api.v1.schema` and mirrors the CLI JSON payloads.
+**Scope:** OpenAPI schema contract.
+**Audience:** API users and contributors.
+**Guarantees:** api/v1/schema.yaml is authoritative.
+**Non-Goals:** Client SDK generation.
 
-Core models:
+## Overview
+Why: Point to the schema source of truth.
 
-- `RunRequest`: run a sequence with CLI-aligned options (includes optional `ground_truth`).
-- `RunResponse`: run summary payload (same as `run_summary.json`).
-- `ResumeRequest`: resume by `run_id` or `candidate_id`.
-- `InspectResponse`: candidate metrics, artifacts, and QC status.
-- `CompareRequest` / `CompareResponse`: comparison report (same as CLI compare).
-- `ErrorResponse`: standardized error shape.
+## Contracts
+- Schema lives at api/v1/schema.yaml.
 
-Key fields present in run/resume responses:
+## Invariants
+- Breaking changes require version bump.
 
-- `run_id`, `candidate_id`, `command`
-- `execution_status`, `workflow_state`, `outcome`
-- `provider`, `tool_status`, `qc_status`
-- `artifacts_dir`, `warnings`, `failure`, `version`
+## Failure Modes
+- Schema drift fails CI.
 
-Enums are imported from core (`agentic_proteins.core.status` and `agentic_proteins.core.failures`) so their names match the runtime.
+## Extension Points
+- Add schemas with tests.
 
-Error payloads (RFC 7807 style):
+## Exit Criteria
+- Obsolete when schema is generated.
+- Replacement: generated schema docs.
 
-- `type`: URI identifying the problem type
-- `title`: short summary
-- `status`: HTTP status code
-- `detail`: human-readable explanation
-- `instance`: request URL
-
-Module refs: agentic_proteins.api.v1.schema.
+Code refs: src/agentic_proteins/api/app.py, scripts/check_openapi_drift.py.

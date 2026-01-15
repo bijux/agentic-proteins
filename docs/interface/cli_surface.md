@@ -1,6 +1,15 @@
-# CLI Surface
+# cli_surface
 
-## Public commands
+**Scope:** CLI surface list.
+**Audience:** Contributors and reviewers.
+**Guarantees:** Documents the full CLI surface used in tests.
+**Non-Goals:** Usage examples.
+
+## Overview
+Why: Provide a single source for CLI surface auditing.
+
+## Contracts
+Public commands:
 - api
 - run
 - resume
@@ -9,8 +18,7 @@
 - export-report
 - reproduce
 - api serve
-
-## Stable flags
+Stable flags:
 - --sequence
 - --fasta
 - --rounds
@@ -25,8 +33,20 @@
 - --host
 - --port
 - --no-docs
-
-## Experimental flags
+Experimental flags:
 - --reload
 
-Module refs: agentic_proteins.interfaces.cli.
+## Invariants
+- CLI surface matches the click definitions.
+
+## Failure Modes
+- Missing documentation fails tests.
+
+## Extension Points
+- Update this list when new flags land.
+
+## Exit Criteria
+- Obsolete when CLI surface is generated.
+- Replacement: CLI surface generator.
+
+Code refs: src/agentic_proteins/interfaces/cli.py, tests/unit/test_cli_surface_documentation.py.

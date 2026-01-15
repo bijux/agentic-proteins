@@ -1,31 +1,27 @@
-# HTTP API Overview
+# overview
 
-The HTTP API is a thin wrapper over the CLI/runtime. It exposes the same capabilities as the CLI, nothing more.
+**Scope:** HTTP API summary.
+**Audience:** API users.
+**Guarantees:** API mirrors CLI capabilities.
+**Non-Goals:** Authentication.
 
-Scope:
+## Overview
+Why: Define the API surface at a glance.
 
-- Provides synchronous endpoints for run, resume, inspect, and compare.
-- Returns the same JSON payloads as the CLI `--json` output.
-- Uses the same runtime entrypoints and artifacts on disk.
-- Resolves relative file paths against the server base directory.
+## Contracts
+- Endpoints map to CLI commands.
 
-Non-goals (v1):
+## Invariants
+- API returns structured envelopes.
 
-- No streaming responses.
-- No authentication/authorization.
-- No async background jobs.
-- Not a second execution engine.
+## Failure Modes
+- Invalid inputs return error envelopes.
 
-Stability policy:
+## Extension Points
+- Add endpoints with schema updates.
 
-- Versioned under `/api/v1`.
-- Payloads match CLI JSON contracts (not additional guarantees).
-- Backwards-incompatible changes require a new API version.
+## Exit Criteria
+- Obsolete when API is removed.
+- Replacement: none.
 
-Deferred (explicitly out of scope):
-
-- Auth and multi-tenant runs.
-- Async job queue and worker pool.
-- Streaming logs or event feeds.
-
-Module refs: agentic_proteins.api, agentic_proteins.interfaces.cli.
+Code refs: src/agentic_proteins/api/app.py, src/agentic_proteins/api/v1/router.py.

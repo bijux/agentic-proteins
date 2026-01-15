@@ -1,7 +1,31 @@
-- Determinism: identical inputs and seeds must yield identical outputs and artifact hashes.
-- State transitions: lifecycle states change only via explicit, allowed transitions.
-- Artifact immutability: once written, artifact payloads are content-addressed and never mutated.
-- Provider isolation: a run only invokes the explicitly selected provider(s) and records their versions.
-- Failure containment: failures write explicit error artifacts without producing partial tool outputs.
+# invariants
 
-Module refs: agentic_proteins.runtime, agentic_proteins.runtime.control.
+**Scope:** Architectural invariants.
+**Audience:** Contributors.
+**Guarantees:** Invariants map to tests.
+**Non-Goals:** Rationale narrative.
+
+## Overview
+Why: Provide the invariant set that gates changes.
+
+## Contracts
+- Determinism: identical inputs and seeds yield identical outputs.
+- State transitions: lifecycle states change only via allowed transitions.
+- Artifact immutability: artifacts are content-addressed.
+- Provider boundary: runs invoke only selected providers.
+- Failure containment: failures emit error artifacts without partial tool outputs.
+
+## Invariants
+- Invariant tests pass in CI.
+
+## Failure Modes
+- Violations fail tests.
+
+## Extension Points
+- Add invariants with matching tests.
+
+## Exit Criteria
+- Obsolete when invariants move to code metadata.
+- Replacement: invariants registry.
+
+Code refs: tests/regression/test_architecture_invariants.py, src/agentic_proteins/runtime/control/state_machine.py.

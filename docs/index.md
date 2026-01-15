@@ -1,203 +1,27 @@
-# Agentic Proteins
+# index
 
-<a id="top"></a>
+**Scope:** Entry point for docs.
+**Audience:** Readers starting here.
+**Guarantees:** Points to the docs spine.
+**Non-Goals:** Technical detail.
 
-**Deterministic, artifact-first protein design runtime and CLI** for traceable runs, human review, and reproducible decision trails.
+## Overview
+Why: Route readers to the canonical order.
 
-[![PyPI](https://img.shields.io/pypi/v/agentic-proteins.svg)](https://pypi.org/project/agentic-proteins/)
-[![Python](https://img.shields.io/pypi/pyversions/agentic-proteins?logo=python&logoColor=white)](https://pypi.org/project/agentic-proteins/)
-[![License](https://img.shields.io/pypi/l/agentic-proteins.svg)](https://github.com/bijux/agentic-proteins/blob/main/LICENSE)
-[![Docs](https://img.shields.io/badge/docs-mkdocs-blue.svg)](https://bijux.github.io/agentic-proteins/)
-[![HTTP API](https://img.shields.io/badge/http%20api-available-brightgreen.svg)](https://bijux.github.io/agentic-proteins/api/overview/)
-[![CI](https://github.com/bijux/agentic-proteins/actions/workflows/ci.yml/badge.svg)](https://github.com/bijux/agentic-proteins/actions/workflows/ci.yml)
+## Contracts
+- Use docs/spine.md as the start.
 
-> **At a glance:** Deterministic runs • artifact-first output • human-in-the-loop gating • stable JSON contracts  
-> **Audience:** Computational biology teams and lab workflows that require auditability and reproducibility.
+## Invariants
+- This doc stays minimal.
 
----
+## Failure Modes
+- Missing spine breaks navigation.
 
-## Table of Contents
+## Extension Points
+- None.
 
-* [Why Agentic Proteins?](#why-agentic-proteins)
-* [Try It in 30 Seconds](#try-it-in-30-seconds)
-* [Installation](#installation)
-* [Quick Start](#quick-start)
-* [What This Does](#what-this-does)
-* [What This Does Not Do](#what-this-does-not-do)
-* [Stable Public Surface](#stable-public-surface)
-* [HTTP API (Optional)](#http-api-optional)
-* [Docs & Resources](#docs--resources)
-* [Contributing](#contributing)
-* [License](#license)
+## Exit Criteria
+- Obsolete when index is generated.
+- Replacement: generated index page.
 
-[Back to top](#top)
-
----
-
-<a id="why-agentic-proteins"></a>
-
-## Why Agentic Proteins?
-
-Protein design workflows need traceable decisions, stable artifacts, and reproducible execution paths. Agentic Proteins provides a deterministic loop that separates planning, execution, evaluation, and human decision points so that labs can audit and reproduce runs without digging into internal code.
-The public entry points live in `agentic_proteins.runtime` and `agentic_proteins.interfaces.cli`.
-
-[Back to top](#top)
-
----
-
-<a id="try-it-in-30-seconds"></a>
-
-## Try It in 30 Seconds
-
-```bash
-pipx install agentic-proteins  # Or: pip install agentic-proteins
-agentic-proteins run --sequence "ACDEFGHIKLMNPQRSTVWY"
-agentic-proteins inspect-candidate <candidate_id>
-```
-
-[Back to top](#top)
-
----
-
-<a id="installation"></a>
-
-## Installation
-
-Requires **Python 3.11+**.
-
-```bash
-
-# Isolated install (recommended)
-
-pipx install agentic-proteins
-
-# Standard
-
-pip install agentic-proteins
-```
-
-[Back to top](#top)
-
----
-
-<a id="quick-start"></a>
-
-## Quick Start
-
-```bash
-
-# Run a deterministic loop
-
-agentic-proteins run --sequence "ACDEFGHIKLMNPQRSTVWY"
-
-# Resume a run by candidate ID
-
-agentic-proteins resume <candidate_id>
-
-# Compare two runs
-
-agentic-proteins compare <run_a> <run_b>
-```
-
-[Back to top](#top)
-
----
-
-<a id="what-this-does"></a>
-
-## What This Does
-
-* Runs a deterministic agentic loop with traceable artifacts and telemetry.
-* Produces proxy structure-quality signals from sequence heuristics by default.
-* Requires explicit opt-in to run real structure predictors via `--provider`.
-
-[Back to top](#top)
-
----
-
-<a id="what-this-does-not-do"></a>
-
-## What This Does Not Do
-
-* It does not run real structure prediction unless `--provider esmfold|rosettafold|openprotein` is specified and requirements are met.
-* It does not finalize candidate selection without a signed human decision artifact.
-* It does not expose internal modules as stable APIs.
-
-[Back to top](#top)
-
----
-
-<a id="stable-public-surface"></a>
-
-## Stable Public Surface
-
-* Supported CLI commands: `run`, `resume`, `compare`, `inspect-candidate`, `export-report`.
-* Stable artifacts: `artifacts/<run_id>/` layout and JSON payloads.
-* Stable CLI JSON output schema (see docs).
-
-[Back to top](#top)
-
----
-
-<a id="http-api-optional"></a>
-
-## HTTP API (Optional)
-
-The HTTP API is an optional, thin wrapper over the CLI/runtime. It exposes the same capabilities as the CLI, nothing more.
-
-* No streaming responses.
-* No authentication/authorization (yet).
-* No async background jobs (yet).
-
-Start the server:
-
-```bash
-agentic-proteins api serve --host 127.0.0.1 --port 8000
-```
-
-Docs: https://bijux.github.io/agentic-proteins/api/overview/
-
-[Back to top](#top)
-
----
-
-<a id="docs--resources"></a>
-
-## Docs & Resources
-
-Start here:
-
-* **Getting Started**: https://bijux.github.io/agentic-proteins/overview/
-* **CLI Reference**: https://bijux.github.io/agentic-proteins/cli/cli/
-* **HTTP API**: https://bijux.github.io/agentic-proteins/api/overview/
-* **Architecture**: https://bijux.github.io/agentic-proteins/architecture/architecture/
-* **Concepts**: https://bijux.github.io/agentic-proteins/concepts/terminology/
-
-* **Site**: https://bijux.github.io/agentic-proteins/
-* **Changelog**: https://github.com/bijux/agentic-proteins/blob/main/CHANGELOG.md
-* **Repository**: https://github.com/bijux/agentic-proteins
-* **Issues**: https://github.com/bijux/agentic-proteins/issues
-* **Security**: https://github.com/bijux/agentic-proteins/security/advisories/new
-
-[Back to top](#top)
-
----
-
-<a id="contributing"></a>
-
-## Contributing
-
-See **[CONTRIBUTING.md](https://github.com/bijux/agentic-proteins/blob/main/CONTRIBUTING.md)** for setup, style, and tests.
-
-[Back to top](#top)
-
----
-
-<a id="license"></a>
-
-## License
-
-Apache-2.0 — see **[LICENSE](https://github.com/bijux/agentic-proteins/blob/main/LICENSE)**.
-© 2025 Bijan Mousavi.
-
-[Back to top](#top)
+Code refs: docs/spine.md, src/agentic_proteins/__init__.py.
