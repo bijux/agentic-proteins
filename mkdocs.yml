@@ -46,6 +46,9 @@ nav:
       - Confidence: concepts/confidence.md
   - Architecture:
       - Architecture: architecture/architecture.md
+      - Invariants: architecture/invariants.md
+      - Experimental: architecture/experimental.md
+      - Design Debt: architecture/design_debt.md
       - Agents: architecture/agents.md
       - Planning: architecture/planning.md
       - Execution: architecture/execution.md
@@ -60,10 +63,14 @@ nav:
       - Provenance: artifact/provenance.md
   - CLI Reference:
       - CLI Spec: cli/cli.md
+  - Interface:
+      - CLI Surface: interface/cli_surface.md
   - HTTP API:
       - Overview: api/overview.md
       - Schema: api/schema.md
       - Examples: api/examples.md
+  - Security:
+      - Dependencies: security/dependencies.md
   - Workflows:
       - CLI Workflows: workflows/cli-workflows.md
   - Development:

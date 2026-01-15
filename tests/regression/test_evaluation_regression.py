@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from time import perf_counter
 
 import pytest
 
@@ -62,9 +63,15 @@ def load_cases() -> list[EvaluationCase]:
     payload = json.loads(path.read_text())
     return [EvaluationCase.model_validate(item) for item in payload]
 
+def _load_time_budget() -> float:
+    path = Path(__file__).resolve().parent / "time_budget.json"
+    payload = json.loads(path.read_text())
+    return float(payload["evaluation_guardrails_seconds"])
+
 
 @pytest.mark.evaluation
 def test_evaluation_regression_guardrails() -> None:
+    start = perf_counter()
     register_agents()
     register_tools()
     runner = EvaluationRunner(HeuristicBoundary())
@@ -79,6 +86,8 @@ def test_evaluation_regression_guardrails() -> None:
     assert scorecards["quality_control"].failure_rate == pytest.approx(1.0 / 3.0)
     assert scorecards["critic"].failure_rate == pytest.approx(1.0 / 3.0)
     assert scorecards["coordinator"].failure_rate == pytest.approx(1.0 / 3.0)
+    duration = perf_counter() - start
+    assert duration <= _load_time_budget() * 1.2
 
 
 @pytest.mark.evaluation

@@ -171,6 +171,7 @@ Start here:
 * **CLI Reference**: https://bijux.github.io/agentic-proteins/cli/cli/
 * **HTTP API**: https://bijux.github.io/agentic-proteins/api/overview/
 * **Architecture**: https://bijux.github.io/agentic-proteins/architecture/architecture/
+* **Invariants**: https://bijux.github.io/agentic-proteins/architecture/invariants/
 * **Concepts**: https://bijux.github.io/agentic-proteins/concepts/terminology/
 
 * **Site**: https://bijux.github.io/agentic-proteins/
