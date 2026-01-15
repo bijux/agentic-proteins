@@ -12,7 +12,7 @@ RM            := rm -rf
 
 # ---- Single virtualenv (Python 3.11+) ----
 VENV            := .venv
-VENV_PYTHON     := $(if $(wildcard $(VENV)/bin/python),$(VENV)/bin/python,python3)
+VENV_PYTHON     := $(if $(shell test -x "$(VENV)/bin/python" && echo yes),$(VENV)/bin/python,python3)
 ACT             := $(if $(wildcard $(VENV)/bin/activate),$(VENV)/bin,)
 
 # ---- Includes ----

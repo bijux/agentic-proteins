@@ -15,8 +15,8 @@ BENCHMARK_DIR         ?= $(TEST_ARTIFACTS_DIR)/benchmarks
 ENABLE_BENCH          ?= 1
 PYTEST_ADDOPTS_EXTRA  ?=
 
-# Use venv Python for pytest to avoid missing entrypoints.
-PY                   ?= $(VENV_PYTHON)
+# Use absolute venv Python for pytest to avoid missing entrypoints after cd.
+PY                   ?= $(if $(wildcard $(VENV)/bin/python),$(abspath $(VENV)/bin/python),python3)
 PYTEST               ?= $(PY) -m pytest
 
 # absolute paths so running from artifacts_pages/test works cleanly

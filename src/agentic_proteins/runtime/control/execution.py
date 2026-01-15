@@ -6,7 +6,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import UTC, datetime
 import importlib.metadata
 import json
 from pathlib import Path
@@ -547,7 +547,7 @@ class PipelineExecutor:
             state_id=f"state-{loop_state.iteration_index}",
             parent_state_id=None,
             plan_fingerprint=plan_fingerprint,
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             agent_decisions=[],
             artifacts=[decision_artifact, tool_artifact, report_artifact],
             metrics=[],

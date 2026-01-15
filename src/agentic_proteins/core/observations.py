@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import UTC, datetime
 from enum import Enum
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -77,7 +77,7 @@ class EvaluationInput(BaseModel):
             state_id="state-0",
             parent_state_id=None,
             plan_fingerprint="unknown",
-            timestamp=datetime.utcnow(),
+            timestamp=datetime.now(UTC),
             agent_decisions=[],
             artifacts=[],
             metrics=[],

@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import UTC, datetime
 import json
 from typing import Protocol
 
@@ -65,7 +65,7 @@ def snapshot_state(
         state_id=state_id,
         parent_state_id=parent_state_id,
         plan_fingerprint=plan_fingerprint,
-        timestamp=datetime.utcnow(),
+        timestamp=datetime.now(UTC),
         agent_decisions=list(decisions),
         artifacts=[],
         metrics=[],

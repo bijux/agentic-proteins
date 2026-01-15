@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import UTC, datetime
 import json
 from pathlib import Path
 from typing import Any
@@ -39,7 +39,7 @@ class StructuredLogger:
         ):
             component_value = f"{self._base_component}.{component}"
         payload = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "run_id": self._run_id,
             "component": component_value,
             "event": event,

@@ -6,7 +6,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 import json
 from pathlib import Path
 from typing import Any
@@ -100,7 +100,7 @@ class ExecutionSnapshots:
         """record."""
         self.snapshots.append(
             {
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": datetime.now(UTC).isoformat(),
                 "iteration_index": iteration_index,
                 "state": state,
                 "decisions": decisions,
@@ -134,7 +134,7 @@ class TelemetryHooks:
         """record_snapshot."""
         self._snapshots.append(
             {
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": datetime.now(UTC).isoformat(),
                 "agent": agent_name,
                 "iteration_index": iteration_index,
                 "payload": payload,

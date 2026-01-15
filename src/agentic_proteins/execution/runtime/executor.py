@@ -6,7 +6,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from datetime import datetime
+from datetime import UTC, datetime
 import time
 
 from agentic_proteins.core.hashing import sha256_hex
@@ -64,7 +64,7 @@ def materialize_observation(result: ToolResult, task: ExecutionTask) -> Observat
         tool_result_fingerprint=fingerprint,
         metrics=metrics,
         confidence=0.0,
-        timestamp=datetime.utcnow(),
+        timestamp=datetime.now(UTC),
     )
 
 

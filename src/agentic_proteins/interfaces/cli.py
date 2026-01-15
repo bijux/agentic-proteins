@@ -11,6 +11,7 @@ from typing import Any, Literal
 
 import click
 from pydantic import BaseModel, ConfigDict, Field, model_validator
+import uvicorn
 
 from agentic_proteins.domain.candidates import CandidateStore
 from agentic_proteins.domain.candidates.schema import Candidate
@@ -461,6 +462,25 @@ def export_report(
         _emit_json_payload(payload, pretty=pretty)
         return
     _emit_json_payload(payload, pretty=True)
+
+
+@cli.group("api")
+def api() -> None:
+    """api."""
+
+
+@api.command("serve")
+@click.option("--host", type=str, default="127.0.0.1", show_default=True)
+@click.option("--port", type=int, default=8000, show_default=True)
+@click.option("--reload", is_flag=True, help="Auto-reload on changes.")
+@click.option("--no-docs", is_flag=True, help="Disable OpenAPI docs.")
+def api_serve(host: str, port: int, reload: bool, no_docs: bool) -> None:
+    """api_serve."""
+    from agentic_proteins.api import AppConfig, create_app
+
+    config = AppConfig(base_dir=Path.cwd(), docs_enabled=not no_docs)
+    app = create_app(config)
+    uvicorn.run(app, host=host, port=port, reload=reload)
 
 
 if __name__ == "__main__":

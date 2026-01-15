@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import UTC, datetime
 
 from agentic_proteins.agents.planning.schemas import Plan
 from agentic_proteins.core.decisions import Decision
@@ -27,7 +27,7 @@ def tool_result_to_memory(
         scope=scope,
         producer=producer,
         payload=ToolResultPayload(result=result),
-        created_at=datetime.utcnow(),
+        created_at=datetime.now(UTC),
         expires_at=None,
     )
 

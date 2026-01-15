@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import UTC, datetime
 
 from agentic_proteins.agents.execution.coordinator import CoordinatorAgent
 from agentic_proteins.agents.verification.critic import CriticAgent
@@ -27,7 +27,7 @@ def sample_state() -> StateSnapshot:
         state_id="s1",
         parent_state_id=None,
         plan_fingerprint="p1",
-        timestamp=datetime.utcnow(),
+        timestamp=datetime.now(UTC),
         agent_decisions=[],
         artifacts=[],
         metrics=[],
@@ -45,7 +45,7 @@ def sample_eval_input() -> EvaluationInput:
                 tool_result_fingerprint="f1",
                 metrics=[],
                 confidence=0.1,
-                timestamp=datetime.utcnow(),
+                timestamp=datetime.now(UTC),
             )
         ],
         prior_state=sample_state(),

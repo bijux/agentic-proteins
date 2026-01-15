@@ -6,7 +6,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 
 from agentic_proteins.runtime.workspace import write_json_atomic
@@ -34,7 +34,7 @@ class RunAnalysis:
     ) -> None:
         """record_candidate_event."""
         entry = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(UTC).isoformat(),
             "event": event,
         }
         if payload:

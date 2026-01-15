@@ -8,6 +8,7 @@
 [![Python](https://img.shields.io/pypi/pyversions/agentic-proteins?logo=python&logoColor=white)](https://pypi.org/project/agentic-proteins/)
 [![License](https://img.shields.io/pypi/l/agentic-proteins.svg)](https://github.com/bijux/agentic-proteins/blob/main/LICENSE)
 [![Docs](https://img.shields.io/badge/docs-mkdocs-blue.svg)](https://bijux.github.io/agentic-proteins/)
+[![HTTP API](https://img.shields.io/badge/http%20api-available-brightgreen.svg)](https://bijux.github.io/agentic-proteins/api/overview/)
 [![CI](https://github.com/bijux/agentic-proteins/actions/workflows/ci.yml/badge.svg)](https://github.com/bijux/agentic-proteins/actions/workflows/ci.yml)
 
 > **At a glance:** Deterministic runs • artifact-first output • human-in-the-loop gating • stable JSON contracts  
@@ -24,6 +25,7 @@
 * [What This Does](#what-this-does)
 * [What This Does Not Do](#what-this-does-not-do)
 * [Stable Public Surface](#stable-public-surface)
+* [HTTP API (Optional)](#http-api-optional)
 * [Docs & Resources](#docs--resources)
 * [Contributing](#contributing)
 * [License](#license)
@@ -50,7 +52,7 @@ The public entry points live in `agentic_proteins.runtime` and `agentic_proteins
 ```bash
 pipx install agentic-proteins  # Or: pip install agentic-proteins
 agentic-proteins run --sequence "ACDEFGHIKLMNPQRSTVWY"
-agentic-proteins inspect-candidate --latest
+agentic-proteins inspect-candidate <candidate_id>
 ```
 
 [Back to top](#top)
@@ -88,13 +90,13 @@ pip install agentic-proteins
 
 agentic-proteins run --sequence "ACDEFGHIKLMNPQRSTVWY"
 
-# Resume a run by ID
+# Resume a run by candidate ID
 
-agentic-proteins resume --run-id <run_id>
+agentic-proteins resume <candidate_id>
 
 # Compare two runs
 
-agentic-proteins compare --left <run_id> --right <run_id>
+agentic-proteins compare <run_a> <run_b>
 ```
 
 [Back to top](#top)
@@ -137,6 +139,28 @@ agentic-proteins compare --left <run_id> --right <run_id>
 
 ---
 
+<a id="http-api-optional"></a>
+
+## HTTP API (Optional)
+
+The HTTP API is an optional, thin wrapper over the CLI/runtime. It exposes the same capabilities as the CLI, nothing more.
+
+* No streaming responses.
+* No authentication/authorization (yet).
+* No async background jobs (yet).
+
+Start the server:
+
+```bash
+agentic-proteins api serve --host 127.0.0.1 --port 8000
+```
+
+Docs: https://bijux.github.io/agentic-proteins/api/overview/
+
+[Back to top](#top)
+
+---
+
 <a id="docs--resources"></a>
 
 ## Docs & Resources
@@ -145,6 +169,7 @@ Start here:
 
 * **Getting Started**: https://bijux.github.io/agentic-proteins/overview/
 * **CLI Reference**: https://bijux.github.io/agentic-proteins/cli/cli/
+* **HTTP API**: https://bijux.github.io/agentic-proteins/api/overview/
 * **Architecture**: https://bijux.github.io/agentic-proteins/architecture/architecture/
 * **Concepts**: https://bijux.github.io/agentic-proteins/concepts/terminology/
 

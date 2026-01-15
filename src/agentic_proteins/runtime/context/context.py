@@ -6,7 +6,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 from uuid import uuid4
@@ -38,7 +38,7 @@ def create_run_context(
 ) -> tuple[RunContext, list[str]]:
     """create_run_context."""
     run_id = uuid4().hex
-    start_time = datetime.utcnow()
+    start_time = datetime.now(UTC)
     config = config or RunConfig()
     normalized, warnings = config.with_defaults()
     artifacts_override = (

@@ -6,7 +6,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import UTC, datetime
 import json
 from pathlib import Path
 from typing import Any
@@ -162,7 +162,7 @@ class RunWorkspace:
                 "state_id": "state-0",
                 "parent_state_id": None,
                 "plan_fingerprint": "unknown",
-                "timestamp": datetime.utcnow().isoformat(),
+                "timestamp": datetime.now(UTC).isoformat(),
                 "agent_decisions": [],
                 "artifacts": [],
                 "metrics": [],

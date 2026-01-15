@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 
 import pytest
 
@@ -52,7 +52,7 @@ def test_state_snapshot_immutable() -> None:
         scope=MemoryScope.SESSION,
         producer="planner",
         payload=DecisionPayload(decision=decision),
-        created_at=datetime.utcnow(),
+        created_at=datetime.now(UTC),
         expires_at=None,
     )
     snapshot = snapshot_state(plan, [decision], [record])
@@ -76,8 +76,8 @@ def test_snapshot_does_not_mutate_inputs() -> None:
         scope=MemoryScope.SESSION,
         producer="planner",
         payload=DecisionPayload(decision=decision),
-        created_at=datetime.utcnow(),
-        expires_at=datetime.utcnow() + timedelta(days=1),
+        created_at=datetime.now(UTC),
+        expires_at=datetime.now(UTC) + timedelta(days=1),
     )
     decisions = [decision]
     memory = [record]
