@@ -1,6 +1,32 @@
 # Changelog
+<a id="top"></a>
 
-## 0.1.0
+All notable changes to **agentic-proteins** are documented here.
+This project adheres to [Semantic Versioning](https://semver.org) and the
+[Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
+
+<a id="unreleased"></a>
+## [Unreleased]
+
+<!-- unreleased start -->
+### Added
+* (add new entries via fragments in `changelog.d/`)
+
+### Changed
+* (add here)
+
+### Fixed
+* (add here)
+<!-- unreleased end -->
+
+[Back to top](#top)
+
+---
+
+<!-- release start -->
+<a id="v0-1-0"></a>
+
+## [0.1.0]
 
 ### Added
 - Deterministic, artifact-first execution engine with explicit run directories and state snapshots.
@@ -13,3 +39,4 @@
 - Reproducibility controls, observability hooks, and execution telemetry.
 - Example datasets and reference runs for local experimentation and validation.
 - Comprehensive test suite covering unit, integration, regression, and execution boundaries.
+<!-- release end -->

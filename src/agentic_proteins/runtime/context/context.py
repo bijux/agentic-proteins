@@ -34,10 +34,10 @@ class RunContext:
 
 
 def create_run_context(
-    base_dir: Path, config: RunConfig | None = None
+    base_dir: Path, config: RunConfig | None = None, run_id: str | None = None
 ) -> tuple[RunContext, list[str]]:
     """create_run_context."""
-    run_id = uuid4().hex
+    run_id = run_id or uuid4().hex
     start_time = datetime.now(UTC)
     config = config or RunConfig()
     normalized, warnings = config.with_defaults()

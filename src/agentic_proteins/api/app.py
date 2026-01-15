@@ -21,7 +21,7 @@ from agentic_proteins.api.errors import (
     ok_envelope,
     validation_error,
 )
-from agentic_proteins.api.middleware import RequestIdMiddleware
+from agentic_proteins.api.middleware import RequestIdMiddleware, RequestLogMiddleware
 from agentic_proteins.api.v1.router import router as v1_router
 from agentic_proteins.api.v1.schema import ApiEnvelope
 from agentic_proteins.providers import provider_metadata
@@ -58,6 +58,7 @@ def create_app(config: AppConfig) -> FastAPI:
     app.state.base_dir = config.base_dir
 
     app.add_middleware(RequestIdMiddleware)
+    app.add_middleware(RequestLogMiddleware)
 
     @app.middleware("http")
     async def _method_guard(request: Request, call_next) -> JSONResponse:

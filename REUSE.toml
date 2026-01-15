@@ -8,7 +8,7 @@ path = [
   "**/*.env", "**/*.env.*", "**/*.yaml", "**/*.yml", "**/*.json", "**/*.pdb",
   "**/*.cff", "**/*.dic", ".coverage*", ".gitattributes", ".gitignore",
   "models/**", "**/.editorconfig", "artifacts/**", ".idea/**", "**/*.pyc",
-  "**/*.fasta",
+  "**/*.fasta", "**/*.gitkeep",
 ]
 precedence = "override"
 SPDX-License-Identifier = "CC0-1.0"

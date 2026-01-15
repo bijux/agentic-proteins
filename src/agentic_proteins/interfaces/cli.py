@@ -5,6 +5,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from typing import Any, Literal
@@ -206,6 +207,14 @@ def _load_run_summary(
     return json.loads(workspace.run_summary_path.read_text())
 
 
+def _load_run_config(run_dir: Path) -> RunConfig:
+    """_load_run_config."""
+    config_path = run_dir / "config.json"
+    if not config_path.exists():
+        raise FileNotFoundError(f"Config not found at {config_path}")
+    return RunConfig.model_validate(json.loads(config_path.read_text()))
+
+
 def _emit_run_summary_human(summary: dict[str, Any]) -> None:
     """_emit_run_summary_human."""
     click.echo("")
@@ -231,6 +240,18 @@ def _emit_run_summary_human(summary: dict[str, Any]) -> None:
         candidate_id = summary.get("candidate_id", summary["run_id"])
         click.echo(f"  agentic-proteins inspect-candidate {candidate_id}")
         click.echo(f"  agentic-proteins resume  {candidate_id} --approve")
+
+
+def _artifact_hashes(run_dir: Path) -> dict[str, str]:
+    """_artifact_hashes."""
+    artifacts_dir = run_dir / "artifacts"
+    if not artifacts_dir.exists():
+        raise FileNotFoundError(f"Artifacts not found at {artifacts_dir}")
+    hashes: dict[str, str] = {}
+    for path in sorted(artifacts_dir.glob("*.json")):
+        digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        hashes[path.name] = digest
+    return hashes
 
 
 @click.group()
@@ -481,6 +502,63 @@ def api_serve(host: str, port: int, reload: bool, no_docs: bool) -> None:
     config = AppConfig(base_dir=Path.cwd(), docs_enabled=not no_docs)
     app = create_app(config)
     uvicorn.run(app, host=host, port=port, reload=reload)
+
+
+@cli.command("reproduce")
+@click.argument("run_id", type=str)
+@click.option("--pretty", is_flag=True, help="Pretty-print JSON output.")
+@click.option("--json", "json_output", is_flag=True, help="Emit JSON output.")
+def reproduce(run_id: str, pretty: bool, json_output: bool) -> None:
+    """reproduce."""
+    try:
+        base_dir = Path.cwd()
+        original_workspace = RunWorkspace.for_run(base_dir, run_id)
+        if not original_workspace.run_dir.exists():
+            raise FileNotFoundError(f"Run not found at {original_workspace.run_dir}")
+        summary = json.loads(original_workspace.run_summary_path.read_text())
+        candidate_id = summary.get("candidate_id") or f"{run_id}-c0"
+        store = CandidateStore(original_workspace.candidate_store_dir)
+        candidate = store.get_candidate(candidate_id)
+        config = _load_run_config(original_workspace.run_dir)
+        reproduce_root = base_dir / "artifacts" / "reproduce"
+        reproduce_workspace = RunWorkspace.for_run(
+            base_dir, run_id, artifacts_root_override=reproduce_root
+        )
+        if reproduce_workspace.run_dir.exists():
+            raise FileExistsError(
+                f"Reproduce run already exists at {reproduce_workspace.run_dir}"
+            )
+        reproduce_config = config.model_copy(
+            update={"artifacts_dir": str(reproduce_root)}
+        )
+        manager = RunManager(base_dir, reproduce_config)
+        manager.run_candidate(candidate, run_id=run_id)
+        original_hashes = _artifact_hashes(original_workspace.run_dir)
+        reproduced_hashes = _artifact_hashes(reproduce_workspace.run_dir)
+        if original_hashes != reproduced_hashes:
+            raise ValueError(
+                "Artifact hashes diverged between original and reproduced runs."
+            )
+        payload = {
+            "run_id": run_id,
+            "reproduced_run_dir": str(reproduce_workspace.run_dir),
+            "artifact_hashes_match": True,
+        }
+    except Exception as exc:  # noqa: BLE001
+        if json_output:
+            _emit_json_payload(
+                CliResult(
+                    status="error", command="reproduce", error=str(exc)
+                ).model_dump(mode="json"),
+                pretty=pretty,
+            )
+        else:
+            click.echo(f"Error: {exc}")
+        raise SystemExit(1) from exc
+    if json_output:
+        _emit_json_payload(payload, pretty=pretty)
+        return
+    _emit_json_payload(payload, pretty=True)
 
 
 if __name__ == "__main__":

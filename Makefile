@@ -26,6 +26,7 @@ include makefiles/docs.mk
 include makefiles/api.mk
 include makefiles/citation.mk
 include makefiles/dictionary.mk
+include makefiles/changelog.mk
 
 -include .env
 export

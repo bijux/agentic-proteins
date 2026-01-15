@@ -166,10 +166,13 @@ class CandidateStore:
 
     def _candidate_path(self, candidate_id: str) -> Path:
         """_candidate_path."""
+        self._ensure_safe_id(candidate_id, "candidate_id")
         return self._candidates_dir / f"{candidate_id}.json"
 
     def _version_path(self, candidate_id: str, version_id: str) -> Path:
         """_version_path."""
+        self._ensure_safe_id(candidate_id, "candidate_id")
+        self._ensure_safe_id(version_id, "version_id")
         version_dir = self._versions_dir / candidate_id
         version_dir.mkdir(parents=True, exist_ok=True)
         return version_dir / f"{version_id}.json"
@@ -178,6 +181,9 @@ class CandidateStore:
         self, candidate_id: str, version_id: str, artifact_id: str
     ) -> Path:
         """_artifact_path."""
+        self._ensure_safe_id(candidate_id, "candidate_id")
+        self._ensure_safe_id(version_id, "version_id")
+        self._ensure_safe_id(artifact_id, "artifact_id")
         artifact_dir = self._artifacts_dir / candidate_id / version_id
         artifact_dir.mkdir(parents=True, exist_ok=True)
         return artifact_dir / f"{artifact_id}.json"
@@ -191,6 +197,12 @@ class CandidateStore:
     def _read_json(path: Path) -> dict[str, Any]:
         """_read_json."""
         return json.loads(path.read_text())
+
+    @staticmethod
+    def _ensure_safe_id(value: str, label: str) -> None:
+        """_ensure_safe_id."""
+        if not value or any(token in value for token in ("/", "\\", "..")):
+            raise ValueError(f"Unsafe {label}: {value}")
 
 
 def _hash_payload(payload: dict[str, Any]) -> str:

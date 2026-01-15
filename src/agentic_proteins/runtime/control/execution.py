@@ -710,22 +710,35 @@ class RunManager:
         self._base_dir = base_dir
         self._config = config or RunConfig()
 
-    def run(self, sequence: str, tool: Tool | None = None) -> dict:
+    def run(
+        self, sequence: str, tool: Tool | None = None, run_id: str | None = None
+    ) -> dict:
         """run."""
         try:
             RunRequest.model_validate({"sequence": sequence})
         except Exception as exc:  # noqa: BLE001
-            context, warnings = create_run_context(self._base_dir, self._config)
+            context, warnings = create_run_context(
+                self._base_dir, self._config, run_id=run_id
+            )
             selected_tool = tool or _select_structure_tool(context.config)
             return self._fail_fast(
                 context, [str(exc)], FailureType.INPUT_INVALID.value, selected_tool
             )
-        context, warnings = create_run_context(self._base_dir, self._config)
+        context, warnings = create_run_context(
+            self._base_dir, self._config, run_id=run_id
+        )
         return self._run_with_context(sequence, context, warnings, tool)
 
-    def run_candidate(self, candidate: Candidate, tool: Tool | None = None) -> dict:
+    def run_candidate(
+        self,
+        candidate: Candidate,
+        tool: Tool | None = None,
+        run_id: str | None = None,
+    ) -> dict:
         """run_candidate."""
-        context, warnings = create_run_context(self._base_dir, self._config)
+        context, warnings = create_run_context(
+            self._base_dir, self._config, run_id=run_id
+        )
         selected_tool = tool or _select_structure_tool(context.config)
         start = perf_counter()
         run_logger = context.logger.scope("run")

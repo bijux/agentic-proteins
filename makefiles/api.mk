@@ -86,10 +86,13 @@ define VALIDATE_ONE_SCHEMA
   } 2>&1 | tee "$(API_LINT_DIR_ABS)/$(notdir $(1)).log"
 endef
 
-.PHONY: api api-install api-lint api-test api-serve api-serve-bg api-stop api-clean node_deps node_bootstrap
+.PHONY: api api-install api-lint api-test api-serve api-serve-bg api-stop api-clean node_deps node_bootstrap openapi-drift
 
 ## Orchestrator
 api: api-install api-lint api-test
+
+openapi-drift:
+	@$(PYTHON) scripts/check_openapi_drift.py
 
 # ── Install toolchain (Python + Node sandbox)
 api-install: | $(VENV) node_deps
