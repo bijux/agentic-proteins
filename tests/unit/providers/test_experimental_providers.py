@@ -98,6 +98,26 @@ def test_colabfold_predict_success(monkeypatch: pytest.MonkeyPatch) -> None:
     assert result.pdb_text == "PDB"
 
 
+def test_colabfold_healthcheck_ok(monkeypatch: pytest.MonkeyPatch) -> None:
+    post = _FakeResponse(status_code=200, payload={})
+    poll = _FakeResponse(status_code=200, payload={})
+    monkeypatch.setattr(colabfold.requests, "Session", lambda: _FakeSession(post, poll))
+    provider = colabfold.APIColabFoldProvider(api_url="http://example")
+    assert provider.healthcheck() is True
+
+
+def test_colabfold_healthcheck_failure(monkeypatch: pytest.MonkeyPatch) -> None:
+    class _FailSession(_FakeSession):
+        def get(self, *_args, **_kwargs):
+            raise RequestException("down")
+
+    post = _FakeResponse(status_code=200, payload={"job_id": "job-1"})
+    poll = _FakeResponse(status_code=200, payload={})
+    monkeypatch.setattr(colabfold.requests, "Session", lambda: _FailSession(post, poll))
+    provider = colabfold.APIColabFoldProvider(api_url="http://example")
+    assert provider.healthcheck() is False
+
+
 def test_colabfold_predict_missing_job_id(monkeypatch: pytest.MonkeyPatch) -> None:
     post = _FakeResponse(status_code=200, payload={"status": "ok"})
     poll = _FakeResponse(status_code=200, payload={})
@@ -126,6 +146,80 @@ def test_colabfold_predict_auth_error(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setattr(colabfold.requests, "Session", lambda: _FakeSession(post, poll))
     provider = colabfold.APIColabFoldProvider(api_url="http://example")
     with pytest.raises(PredictionError, match="Authentication failed"):
+        provider.predict("ACD", timeout=5.0)
+
+
+def test_colabfold_predict_missing_status(monkeypatch: pytest.MonkeyPatch) -> None:
+    post = _FakeResponse(status_code=200, payload={"job_id": "job-4"})
+    poll = _FakeResponse(status_code=200, payload={"result": {}})
+    monkeypatch.setattr(colabfold.requests, "Session", lambda: _FakeSession(post, poll))
+    monkeypatch.setattr(colabfold, "sleep_with_backoff", lambda *args, **kwargs: (1.0, 0.0))
+    provider = colabfold.APIColabFoldProvider(api_url="http://example")
+    with pytest.raises(PredictionError, match="No status"):
+        provider.predict("ACD", timeout=5.0)
+
+
+def test_colabfold_predict_missing_pdb(monkeypatch: pytest.MonkeyPatch) -> None:
+    post = _FakeResponse(status_code=200, payload={"job_id": "job-5"})
+    poll = _FakeResponse(
+        status_code=200,
+        payload={"status": "SUCCESS", "result": {"models": [{"pdb": 123}]}},
+    )
+    monkeypatch.setattr(colabfold.requests, "Session", lambda: _FakeSession(post, poll))
+    monkeypatch.setattr(colabfold, "sleep_with_backoff", lambda *args, **kwargs: (1.0, 0.0))
+    provider = colabfold.APIColabFoldProvider(api_url="http://example")
+    with pytest.raises(PredictionError, match="No PDB string"):
+        provider.predict("ACD", timeout=5.0)
+
+
+def test_colabfold_predict_empty_pdb(monkeypatch: pytest.MonkeyPatch) -> None:
+    post = _FakeResponse(status_code=200, payload={"job_id": "job-6"})
+    poll = _FakeResponse(
+        status_code=200,
+        payload={"status": "SUCCESS", "result": {"models": [{"pdb": ""}]}},
+    )
+    monkeypatch.setattr(colabfold.requests, "Session", lambda: _FakeSession(post, poll))
+    monkeypatch.setattr(colabfold, "sleep_with_backoff", lambda *args, **kwargs: (1.0, 0.0))
+    provider = colabfold.APIColabFoldProvider(api_url="http://example")
+    with pytest.raises(PredictionError, match="Empty PDB"):
+        provider.predict("ACD", timeout=5.0)
+
+
+def test_colabfold_predict_request_id(monkeypatch: pytest.MonkeyPatch) -> None:
+    post = _FakeResponse(
+        status_code=200, payload={"job_id": "job-7"}, headers={"x-request-id": "req-1"}
+    )
+    poll = _FakeResponse(
+        status_code=200,
+        payload={"status": "SUCCESS", "result": {"models": [{"pdb": "PDB"}]}},
+        headers={"x-request-id": "req-2"},
+    )
+    monkeypatch.setattr(colabfold.requests, "Session", lambda: _FakeSession(post, poll))
+    monkeypatch.setattr(colabfold, "sleep_with_backoff", lambda *args, **kwargs: (1.0, 0.0))
+    monkeypatch.setattr(
+        colabfold, "sleep_with_retry_after", lambda *args, **kwargs: (1.0, 0.0)
+    )
+    provider = colabfold.APIColabFoldProvider(api_url="http://example")
+    result = provider.predict("ACD", timeout=5.0, seed=7)
+    assert result.raw["request_id"] == "req-2"
+    assert result.raw["seed"] == 7
+
+
+def test_colabfold_rate_limit_retries(monkeypatch: pytest.MonkeyPatch) -> None:
+    post = _FakeResponse(status_code=429, payload={}, headers={"Retry-After": "1"})
+    poll = _FakeResponse(status_code=200, payload={})
+
+    class _RetrySession(_FakeSession):
+        def post(self, *_args, **_kwargs) -> _FakeResponse:
+            return self._post_response
+
+    monkeypatch.setattr(colabfold.requests, "Session", lambda: _RetrySession(post, poll))
+    monkeypatch.setattr(colabfold, "_time_left", lambda _deadline: 10.0)
+    monkeypatch.setattr(
+        colabfold, "sleep_with_retry_after", lambda *args, **kwargs: (1.0, 0.0)
+    )
+    provider = colabfold.APIColabFoldProvider(api_url="http://example")
+    with pytest.raises(PredictionError, match="ColabFold post failed after retries"):
         provider.predict("ACD", timeout=5.0)
 
 
@@ -220,6 +314,75 @@ def test_openprotein_wait_and_get_pdb_from_results_dict() -> None:
 
     class _Job:
         job_id = "job-1"
+
+    assert provider._wait_and_get_pdb(_Job(), timeout=1.0) == "PDB"
+
+
+def test_openprotein_wait_and_get_pdb_from_job_method() -> None:
+    provider = APIOpenProteinProvider.__new__(APIOpenProteinProvider)
+
+    class _Job:
+        def get_pdb(self) -> str:
+            return "PDB"
+
+    provider.session = SimpleNamespace()
+    assert provider._wait_and_get_pdb(_Job(), timeout=1.0) == "PDB"
+
+
+def test_openprotein_wait_and_get_pdb_wait_session() -> None:
+    provider = APIOpenProteinProvider.__new__(APIOpenProteinProvider)
+
+    class _Fold:
+        def get_results(self, _job_id: str):
+            return {"pdb_text": "PDB"}
+
+    class _Session:
+        fold = _Fold()
+
+        def wait_until_done(self, *_args, **_kwargs) -> None:
+            raise TypeError("bad args")
+
+    provider.session = _Session()
+
+    class _Job:
+        job_id = "job-9"
+
+    assert provider._wait_and_get_pdb(_Job(), timeout=1.0) == "PDB"
+
+
+def test_openprotein_wait_and_get_pdb_session_handle() -> None:
+    provider = APIOpenProteinProvider.__new__(APIOpenProteinProvider)
+
+    class _Handle:
+        def get_results(self):
+            return {"pdb": "PDB"}
+
+    class _Session:
+        def get(self, _job_id: str):
+            return _Handle()
+
+    provider.session = _Session()
+
+    class _Job:
+        job_id = "job-10"
+
+    assert provider._wait_and_get_pdb(_Job(), timeout=1.0) == "PDB"
+
+
+def test_openprotein_wait_and_get_pdb_attr_result() -> None:
+    provider = APIOpenProteinProvider.__new__(APIOpenProteinProvider)
+
+    class _Result:
+        pdb = "PDB"
+
+    class _Fold:
+        def get_results(self, _job_id: str):
+            return _Result()
+
+    provider.session = SimpleNamespace(fold=_Fold())
+
+    class _Job:
+        job_id = "job-11"
 
     assert provider._wait_and_get_pdb(_Job(), timeout=1.0) == "PDB"
 
@@ -373,6 +536,13 @@ def test_openprotein_pick_submit_fn_get_model_fails_then_fallback() -> None:
     fn, kw = provider._pick_submit_fn(_NS(), SimpleNamespace())
     assert callable(fn)
     assert "model_name" in kw
+
+
+def test_openprotein_pick_submit_fn_missing() -> None:
+    provider = APIOpenProteinProvider.__new__(APIOpenProteinProvider)
+    provider.model = "esmfold"
+    with pytest.raises(PredictionError, match="No submit function"):
+        provider._pick_submit_fn(SimpleNamespace(), SimpleNamespace())
 
 
 def test_colabfold_poll_error_status(monkeypatch: pytest.MonkeyPatch) -> None:

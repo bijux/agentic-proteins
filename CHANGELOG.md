@@ -26,6 +26,30 @@ This project adheres to [Semantic Versioning](https://semver.org) and the
 <!-- release start -->  
 <a id="v0-2-0"></a>  
 
+## [0.2.3]  
+
+### Added  
+- Expanded provider test coverage for ColabFold, OpenProtein, and local ESMFold utilities.  
+- Runtime capability validation tests and candidate filter unit coverage.  
+- Stability marking test for module annotations.  
+
+### Changed  
+- Hardened local ESMFold utility tests to exercise error and success branches.  
+
+### Fixed  
+- Reliability checks and helper tests to keep coverage and gating stable.  
+
+## [0.2.2]  
+
+### Added  
+- Release alignment for docs, gates, and CI structure.  
+
+### Changed  
+- Consistent documentation build and validation wiring.  
+
+### Fixed  
+- Minor release hygiene issues discovered in CI.  
+
 ## [0.2.1]  
 
 ### Added  

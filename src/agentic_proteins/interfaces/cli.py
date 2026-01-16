@@ -6,6 +6,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.metadata
 import json
 from pathlib import Path
 from typing import Any, Literal
@@ -190,9 +191,9 @@ def _artifact_paths(
 def _emit_json_payload(payload: dict | list | str, pretty: bool) -> None:
     """_emit_json_payload."""
     if pretty:
-        click.echo(json.dumps(payload, indent=2, sort_keys=True))
+        click.echo(json.dumps(payload, indent=2, sort_keys=True, default=str))
         return
-    click.echo(json.dumps(payload, sort_keys=True))
+    click.echo(json.dumps(payload, sort_keys=True, default=str))
 
 
 def _load_run_summary(
@@ -255,6 +256,10 @@ def _artifact_hashes(run_dir: Path) -> dict[str, str]:
 
 
 @click.group()
+@click.version_option(
+    version=importlib.metadata.version("agentic-proteins"),
+    package_name="agentic-proteins",
+)
 def cli() -> None:
     """Agentic Proteins CLI (lab-oriented)."""
 
