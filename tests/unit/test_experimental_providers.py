@@ -39,6 +39,15 @@ def test_sleep_with_retry_after_uses_retry_after(
     assert slept == 3.0
 
 
+def test_sleep_with_retry_after_deadline_passed(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(_async_utils.time, "sleep", lambda _s: None)
+    backoff, slept = _async_utils.sleep_with_retry_after(
+        deadline=0.0, backoff=2.0, retry_after=1.0
+    )
+    assert backoff == 2.0
+    assert slept == 0.0
+
+
 @dataclass
 class _FakeResponse:
     status_code: int
@@ -89,6 +98,28 @@ def test_colabfold_predict_success(monkeypatch: pytest.MonkeyPatch) -> None:
     assert result.pdb_text == "PDB"
 
 
+def test_colabfold_predict_missing_job_id(monkeypatch: pytest.MonkeyPatch) -> None:
+    post = _FakeResponse(status_code=200, payload={"status": "ok"})
+    poll = _FakeResponse(status_code=200, payload={})
+    monkeypatch.setattr(colabfold.requests, "Session", lambda: _FakeSession(post, poll))
+    provider = colabfold.APIColabFoldProvider(api_url="http://example")
+    with pytest.raises(PredictionError, match="job_id"):
+        provider.predict("ACD", timeout=5.0)
+
+
+def test_colabfold_predict_bad_json(monkeypatch: pytest.MonkeyPatch) -> None:
+    class _BadResponse(_FakeResponse):
+        def json(self) -> dict[str, Any]:
+            raise ValueError("bad json")
+
+    post = _BadResponse(status_code=200, payload={})
+    poll = _FakeResponse(status_code=200, payload={})
+    monkeypatch.setattr(colabfold.requests, "Session", lambda: _FakeSession(post, poll))
+    provider = colabfold.APIColabFoldProvider(api_url="http://example")
+    with pytest.raises(PredictionError, match="Invalid JSON"):
+        provider.predict("ACD", timeout=5.0)
+
+
 def test_colabfold_predict_auth_error(monkeypatch: pytest.MonkeyPatch) -> None:
     post = _FakeResponse(status_code=401, payload={})
     poll = _FakeResponse(status_code=500, payload={})
@@ -119,6 +150,103 @@ def test_openprotein_predict_success(monkeypatch: pytest.MonkeyPatch) -> None:
     assert result.pdb_text == "PDB"
 
 
-def test_openprotein_requires_credentials() -> None:
+def test_openprotein_requires_credentials(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delenv("OPENPROTEIN_USER", raising=False)
+    monkeypatch.delenv("OPENPROTEIN_PASSWORD", raising=False)
     with pytest.raises(ValueError, match="OPENPROTEIN_USER"):
         APIOpenProteinProvider(user=None, password=None)
+
+
+def test_openprotein_has_attr_handles_exception() -> None:
+    class _Boom:
+        def __getattr__(self, _name):
+            raise RuntimeError("boom")
+
+    assert APIOpenProteinProvider._has_attr(_Boom(), "fold") is False
+
+
+def test_openprotein_debug_dump_handles_exception() -> None:
+    class _Boom:
+        def __dir__(self):
+            raise RuntimeError("boom")
+
+    assert APIOpenProteinProvider._debug_dump(_Boom()) == "<dir() failed>"
+
+
+def test_openprotein_resolve_model_maps_alias() -> None:
+    provider = APIOpenProteinProvider.__new__(APIOpenProteinProvider)
+    provider.model = "alphafold"
+    assert provider._resolve_model() == "af2"
+
+
+def test_openprotein_pick_submit_fn_direct() -> None:
+    provider = APIOpenProteinProvider.__new__(APIOpenProteinProvider)
+    provider.model = "esmfold"
+
+    class _NS:
+        def esmfold(self, sequence: str) -> str:
+            return sequence
+
+    fn, kw = provider._pick_submit_fn(_NS(), SimpleNamespace())
+    assert callable(fn)
+    assert "sequence" in kw
+
+
+def test_openprotein_pick_submit_fn_get_model() -> None:
+    provider = APIOpenProteinProvider.__new__(APIOpenProteinProvider)
+    provider.model = "esmfold"
+
+    class _Model:
+        def submit(self, sequence: str) -> str:
+            return sequence
+
+    class _NS:
+        def get_model(self, _name: str) -> _Model:
+            return _Model()
+
+    fn, kw = provider._pick_submit_fn(_NS(), SimpleNamespace())
+    assert callable(fn)
+    assert "sequence" in kw
+
+
+def test_openprotein_wait_and_get_pdb_from_results_dict() -> None:
+    provider = APIOpenProteinProvider.__new__(APIOpenProteinProvider)
+
+    class _Fold:
+        def get_results(self, _job_id: str):
+            return {"models": [{"pdb": "PDB"}]}
+
+    provider.session = SimpleNamespace(fold=_Fold())
+
+    class _Job:
+        job_id = "job-1"
+
+    assert provider._wait_and_get_pdb(_Job(), timeout=1.0) == "PDB"
+
+
+def test_openprotein_missing_namespace(monkeypatch: pytest.MonkeyPatch) -> None:
+    class _Session:
+        pass
+
+    fake_module = SimpleNamespace(connect=lambda username, password: _Session())
+    monkeypatch.setitem(sys.modules, "openprotein", fake_module)
+
+    provider = APIOpenProteinProvider(user="user", password="pw", model="esmfold")
+    with pytest.raises(PredictionError, match="structure namespace"):
+        provider.predict("ACDE", timeout=1.0)
+
+
+def test_openprotein_submit_failure(monkeypatch: pytest.MonkeyPatch) -> None:
+    class _FoldNamespace:
+        def esmfold(self, sequence: str) -> str:
+            raise RuntimeError("boom")
+
+    class _Session:
+        fold = _FoldNamespace()
+
+    fake_module = SimpleNamespace(connect=lambda username, password: _Session())
+    monkeypatch.setitem(sys.modules, "openprotein", fake_module)
+
+    provider = APIOpenProteinProvider(user="user", password="pw", model="esmfold")
+    with pytest.raises(PredictionError, match="submit failed"):
+        provider.predict("ACDE", timeout=1.0)
