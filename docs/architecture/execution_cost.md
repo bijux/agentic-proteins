@@ -8,8 +8,8 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc defines canonical execution cost.  
-Architecture components are defined in [architecture.md](architecture.md).  
-Read [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md) for structure.  
+Architecture components are defined in [Architecture](architecture.md).  
+Read [Docs Style](../meta/DOCS_STYLE.md) for structure.  
 
 ## Contracts  
 CPU time is recorded per tick.  
@@ -27,13 +27,13 @@ Negative values fail validation.
 Inconsistent ticks fail review.  
 
 ## Extension Points  
-Cost changes update [metrics.md](metrics.md).  
-Stress tests update [pathway_limits.md](pathway_limits.md).  
-Documentation updates follow [../../meta/TRIAGE.md](../meta/TRIAGE.md).  
+Cost changes update [Metrics](metrics.md).  
+Stress tests update [Pathway Limits](pathway_limits.md).  
+Documentation updates follow [Triage](../meta/TRIAGE.md).  
 
 ## Exit Criteria  
 This doc becomes obsolete when costs are generated.  
-The replacement is [metrics.md](metrics.md).  
+The replacement is [Metrics](metrics.md).  
 Obsolete docs are removed.  
 
 Code refs: [src/agentic_proteins/biology/pathway.py](https://github.com/bijux/agentic-proteins/blob/main/src/agentic_proteins/biology/pathway.py).  

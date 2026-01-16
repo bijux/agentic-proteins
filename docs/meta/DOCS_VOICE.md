@@ -8,9 +8,9 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc defines the documentation voice.  
-Architecture components are defined in [architecture/architecture.md](../architecture/architecture.md).  
-Read [DOCS_STYLE.md](DOCS_STYLE.md) before edits.  
-Read [NAMING.md](NAMING.md) for naming context.  
+Architecture components are defined in [Architecture](../architecture/architecture.md).  
+Read [Docs Style](DOCS_STYLE.md) before edits.  
+Read [Naming](NAMING.md) for naming context.  
 
 ## Contracts  
 Tense is present and declarative.  
@@ -30,7 +30,7 @@ Voice violations require a rewrite.
 ## Extension Points  
 Voice rules change only in this file.  
 Voice changes update [scripts/check_docs_consistency.py](https://github.com/bijux/agentic-proteins/blob/main/scripts/check_docs_consistency.py).  
-Voice changes update [DOCS_STYLE.md](DOCS_STYLE.md).  
+Voice changes update [Docs Style](DOCS_STYLE.md).  
 
 ## Exit Criteria  
 This doc becomes obsolete when docs are generated.  

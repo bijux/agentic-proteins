@@ -8,8 +8,8 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc records neutral and negative results.  
-Architecture context lives in [architecture/architecture.md](../architecture/architecture.md).  
-Claim context lives in [falsifiable_claim.md](falsifiable_claim.md).  
+Architecture context lives in [Architecture](../architecture/architecture.md).  
+Claim context lives in [Falsifiable Claim](falsifiable_claim.md).  
 
 ## Contracts  
 Regulator proposals can reduce recovery under strict constraints.  
@@ -19,22 +19,22 @@ Evidence uses [tests/regression/test_negative_results.py](https://github.com/bij
 
 ## Invariants  
 Reported negatives remain visible.  
-Results align with [../governance/core.md](../governance/core.md).  
+Results align with [Core](../governance/core.md).  
 Evidence aligns with [tests/regression/test_negative_results.py](https://github.com/bijux/agentic-proteins/blob/main/tests/regression/test_negative_results.py).  
 
 ## Failure Modes  
 Missing negatives reduces credibility.  
-Result drift breaks [../governance/core.md](../governance/core.md).  
-Missing evidence breaks [../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+Result drift breaks [Core](../governance/core.md).  
+Missing evidence breaks [Docs Style](../meta/DOCS_STYLE.md).  
 
 ## Extension Points  
-Result updates follow [../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
-Extensions align with [architecture/experimental.md](../architecture/experimental.md).  
+Result updates follow [Docs Style](../meta/DOCS_STYLE.md).  
+Extensions align with [Experimental](../architecture/experimental.md).  
 Evidence updates align with [tests/unit/test_docs_contract.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py).  
 
 ## Exit Criteria  
 This doc is obsolete when results are automated.  
-The replacement is [architecture/metrics.md](../architecture/metrics.md).  
+The replacement is [Metrics](../architecture/metrics.md).  
 Obsolete docs are removed.  
 
 Code refs: [tests/regression/test_negative_results.py](https://github.com/bijux/agentic-proteins/blob/main/tests/regression/test_negative_results.py).  

@@ -152,7 +152,7 @@ api-test: | $(VENV) node_deps
 	  echo 'if [ -n "$$TO" ]; then echo "↪︎ Using timeout wrapper: $$TO"; else echo "↪︎ No timeout wrapper in use"; fi' >> "$$script"; \
 	  echo 'echo "→ Running Schemathesis against: $$SCHEMA_URL$(API_BASE_PATH)"' >> "$$script"; \
 	  echo 'EXIT_CODE=0' >> "$$script"; \
-	  echo 'SCHEMA_BIN="$(SCHEMATHESIS)"; case "$$SCHEMA_BIN" in /*) ;; *) SCHEMA_BIN="$$(pwd)/$$SCHEMA_BIN";; esac' >> "$$script"; \
+	  echo 'SCHEMA_BIN="$(SCHEMATHESIS)"; case "$$SCHEMA_BIN" in /*) ;; *) SCHEMA_BIN="$$(command -v "$$SCHEMA_BIN")";; esac' >> "$$script"; \
 	  echo 'tmpdir=$$(mktemp -d); trap "rm -rf $$tmpdir" EXIT; cd "$$tmpdir"' >> "$$script"; \
 	  echo 'for schema in $(ALL_API_SCHEMAS_ABS); do'   >> "$$script"; \
 	  echo '  echo "  • $$schema" | tee -a "$$LOG"' >> "$$script"; \

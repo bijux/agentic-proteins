@@ -8,35 +8,35 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc defines a minimal formal model.  
-Architecture context lives in [architecture/architecture.md](../architecture/architecture.md).  
-Vocabulary aligns with [../concepts/core_concepts.md](../concepts/core_concepts.md).  
+Architecture context lives in [Architecture](../architecture/architecture.md).  
+Vocabulary aligns with [Core Concepts](../concepts/core_concepts.md).  
 
 ## Contracts  
 State space S is the set of agent states.  
 Action space A is the set of signals.  
 Transition function T maps (S, A) to S.  
 Constraint set C limits valid transitions.  
-Constraints align with [architecture/invariants.md](../architecture/invariants.md).  
+Constraints align with [Invariants](../architecture/invariants.md).  
 Validation uses [tests/unit/test_protein_system_rigidity.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_protein_system_rigidity.py).  
 
 ## Invariants  
 S, A, T, and C remain consistent.  
-Definitions align with [../governance/core.md](../governance/core.md).  
+Definitions align with [Core](../governance/core.md).  
 Evidence aligns with [tests/unit/test_protein_system_rigidity.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_protein_system_rigidity.py).  
 
 ## Failure Modes  
 Ambiguous symbols break reviewability.  
-Drift in definitions breaks [../governance/core.md](../governance/core.md).  
-Unlinked references break [../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+Drift in definitions breaks [Core](../governance/core.md).  
+Unlinked references break [Docs Style](../meta/DOCS_STYLE.md).  
 
 ## Extension Points  
-Model updates follow [../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
-Extensions align with [architecture/experimental.md](../architecture/experimental.md).  
+Model updates follow [Docs Style](../meta/DOCS_STYLE.md).  
+Extensions align with [Experimental](../architecture/experimental.md).  
 Evidence updates align with [tests/unit/test_docs_contract.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py).  
 
 ## Exit Criteria  
 This doc is obsolete when a formal spec exists.  
-The replacement is [architecture/architecture.md](../architecture/architecture.md).  
+The replacement is [Architecture](../architecture/architecture.md).  
 Obsolete docs are removed.  
 
 Code refs: [tests/unit/test_protein_system_rigidity.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_protein_system_rigidity.py).  

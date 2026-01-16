@@ -8,9 +8,9 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 Agentic Proteins is a deterministic, artifact-first protein design runtime and CLI.  
-Architecture components are defined in [architecture/architecture.md](architecture/architecture.md).  
-Read [meta/DOCS_STYLE.md](meta/DOCS_STYLE.md) before edits.  
-Read [meta/SPINE.md](meta/SPINE.md) for order.  
+Architecture components are defined in [Architecture](architecture/architecture.md).  
+Read [Docs Style](meta/DOCS_STYLE.md) before edits.  
+Read [Spine](meta/SPINE.md) for order.  
 
 ## Contracts  
 Deterministic runs occur for identical inputs and seeds.  
@@ -23,18 +23,18 @@ Run with `agentic-proteins run --sequence "ACDEFGHIKLMNPQRSTVWY"`.
 Inspect with `agentic-proteins inspect-candidate <candidate_id>`.  
 
 ## Failure Modes  
-Docs: [index.md](index.md).  
-Docs spine: [meta/SPINE.md](meta/SPINE.md).  
-Getting started: [overview/getting_started.md](overview/getting_started.md).  
+Docs: [Index](index.md).  
+Docs spine: [Spine](meta/SPINE.md).  
+Getting started: [Getting Started](overview/getting_started.md).  
 
 ## Extension Points  
-API doc: [api/overview.md](api/overview.md).  
-Core concepts: [concepts/core_concepts.md](concepts/core_concepts.md).  
-Docs style: [meta/DOCS_STYLE.md](meta/DOCS_STYLE.md).  
+API doc: [Overview](api/overview.md).  
+Core concepts: [Core Concepts](concepts/core_concepts.md).  
+Docs style: [Docs Style](meta/DOCS_STYLE.md).  
 
 ## Exit Criteria  
 This entrypoint becomes obsolete when a generated index replaces it.  
-The replacement is [meta/SPINE.md](meta/SPINE.md).  
+The replacement is [Spine](meta/SPINE.md).  
 Obsolete copies are removed.  
 
 Code refs: [tests/unit/test_docs_contract.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py).  

@@ -8,33 +8,33 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc defines one responsibility.  
-Architecture components are defined in [../architecture/architecture.md](../architecture/architecture.md).  
-Read [dependencies.md](dependencies.md) before edits.  
-Read [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md) for context.  
+Architecture components are defined in [Architecture](../architecture/architecture.md).  
+Read [Dependencies](dependencies.md) before edits.  
+Read [Docs Style](../meta/DOCS_STYLE.md) for context.  
 
 ## Contracts  
 Each statement is a contract.  
 Contracts align with [tests/unit/test_abuse_case_path_traversal.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_abuse_case_path_traversal.py).  
-Contracts link to [dependencies.md](dependencies.md) and [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+Contracts link to [Dependencies](dependencies.md) and [Docs Style](../meta/DOCS_STYLE.md).  
 
 ## Invariants  
 Invariants describe stable behavior.  
 Checks align with [tests/unit/test_abuse_case_path_traversal.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_abuse_case_path_traversal.py).  
-Invariants align with [dependencies.md](dependencies.md).  
+Invariants align with [Dependencies](dependencies.md).  
 
 ## Failure Modes  
 Failures are explicit and tested.  
 Failure coverage aligns with [tests/unit/test_abuse_case_path_traversal.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_abuse_case_path_traversal.py).  
-Failures align with [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+Failures align with [Docs Style](../meta/DOCS_STYLE.md).  
 
 ## Extension Points  
 Extensions require tests and docs.  
-Extensions are tracked in [dependencies.md](dependencies.md).  
+Extensions are tracked in [Dependencies](dependencies.md).  
 Extensions align with [tests/unit/test_abuse_case_path_traversal.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_abuse_case_path_traversal.py).  
 
 ## Exit Criteria  
 This doc becomes obsolete when the surface ends.  
-The replacement is linked in [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+The replacement is linked in [Docs Style](../meta/DOCS_STYLE.md).  
 Obsolete docs are removed.  
 
 Code refs: [tests/unit/test_abuse_case_path_traversal.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_abuse_case_path_traversal.py).  

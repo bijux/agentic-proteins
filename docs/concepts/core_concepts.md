@@ -8,8 +8,8 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 Core concepts are defined as a closed vocabulary.  
-Read [../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md) before edits.  
-Architecture components are defined in [architecture/architecture.md](../architecture/architecture.md).  
+Read [Docs Style](../meta/DOCS_STYLE.md) before edits.  
+Architecture components are defined in [Architecture](../architecture/architecture.md).  
 
 ## Contracts  
 Definitions below are the only canonical wording.  
@@ -27,25 +27,25 @@ Terms are linked when used.
 - cell: A cell is an execution environment for pathways.  
 
 ## Invariants  
-Canonical wording is enforced in [../meta/NAMING.md](../meta/NAMING.md).  
+Canonical wording is enforced in [Naming](../meta/NAMING.md).  
 Aliases are not used in docs.  
-Vocabulary aligns with [../overview/getting_started.md](../overview/getting_started.md).  
-failure semantics align with [architecture/invariants.md](../architecture/invariants.md).  
+Vocabulary aligns with [Getting Started](../overview/getting_started.md).  
+failure semantics align with [Invariants](../architecture/invariants.md).  
 
 ## Failure Modes  
 Alias usage fails docs lint.  
 Unlinked terms fail docs lint.  
 Redefinition outside this page fails review.  
-recovery semantics align with [architecture/invariants.md](../architecture/invariants.md).  
+recovery semantics align with [Invariants](../architecture/invariants.md).  
 
 ## Extension Points  
-Change requests follow [../meta/TRIAGE.md](../meta/TRIAGE.md).  
-Updates propagate to [../overview/getting_started.md](../overview/getting_started.md).  
-Updates propagate to [architecture/architecture.md](../architecture/architecture.md).  
+Change requests follow [Triage](../meta/TRIAGE.md).  
+Updates propagate to [Getting Started](../overview/getting_started.md).  
+Updates propagate to [Architecture](../architecture/architecture.md).  
 
 ## Exit Criteria  
 This doc becomes obsolete when vocabulary is generated.  
-The replacement is [architecture/architecture.md](../architecture/architecture.md).  
+The replacement is [Architecture](../architecture/architecture.md).  
 Obsolete docs are removed.  
 
 Code refs: [tests/unit/test_docs_contract.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py).  

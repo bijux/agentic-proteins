@@ -8,8 +8,8 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc defines the final positioning.  
-Architecture context lives in [architecture/architecture.md](../architecture/architecture.md).  
-Vocabulary aligns with [../concepts/core_concepts.md](../concepts/core_concepts.md).  
+Architecture context lives in [Architecture](../architecture/architecture.md).  
+Vocabulary aligns with [Core Concepts](../concepts/core_concepts.md).  
 
 ## Contracts  
 Positioning is agent systems research.  
@@ -19,22 +19,22 @@ Evidence uses [tests/regression/test_architecture_invariants.py](https://github.
 
 ## Invariants  
 Positioning stays fixed across releases.  
-Positioning aligns with [core.md](core.md).  
+Positioning aligns with [Core](core.md).  
 Evidence aligns with [tests/regression/test_architecture_invariants.py](https://github.com/bijux/agentic-proteins/blob/main/tests/regression/test_architecture_invariants.py).  
 
 ## Failure Modes  
 Ambiguous positioning weakens reviewability.  
-Position drift breaks [core.md](core.md).  
-Missing evidence breaks [../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+Position drift breaks [Core](core.md).  
+Missing evidence breaks [Docs Style](../meta/DOCS_STYLE.md).  
 
 ## Extension Points  
-Position updates follow [../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
-Extensions align with [architecture/experimental.md](../architecture/experimental.md).  
+Position updates follow [Docs Style](../meta/DOCS_STYLE.md).  
+Extensions align with [Experimental](../architecture/experimental.md).  
 Evidence updates align with [tests/unit/test_docs_contract.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py).  
 
 ## Exit Criteria  
 This doc is obsolete when positioning is encoded.  
-The replacement is [core.md](core.md).  
+The replacement is [Core](core.md).  
 Obsolete docs are removed.  
 
 Code refs: [tests/regression/test_architecture_invariants.py](https://github.com/bijux/agentic-proteins/blob/main/tests/regression/test_architecture_invariants.py).  

@@ -8,13 +8,13 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc lists required ablations.  
-Architecture context lives in [architecture/architecture.md](../architecture/architecture.md).  
-Claim context lives in [falsifiable_claim.md](falsifiable_claim.md).  
+Architecture context lives in [Architecture](../architecture/architecture.md).  
+Claim context lives in [Falsifiable Claim](falsifiable_claim.md).  
 
 ## Contracts  
 Each ablation removes one capability.  
 Ablations compare recovery and failure metrics.  
-Metrics follow [architecture/metrics.md](../architecture/metrics.md).  
+Metrics follow [Metrics](../architecture/metrics.md).  
 Evidence uses [tests/regression/test_negative_results.py](https://github.com/bijux/agentic-proteins/blob/main/tests/regression/test_negative_results.py).  
 | Ablation | Removed capability | Expected signal. |  
 | --- | --- | --- |  
@@ -25,22 +25,22 @@ Evidence uses [tests/regression/test_negative_results.py](https://github.com/bij
 
 ## Invariants  
 Ablation list stays fixed.  
-List aligns with [../governance/core.md](../governance/core.md).  
+List aligns with [Core](../governance/core.md).  
 Evidence aligns with [tests/regression/test_negative_results.py](https://github.com/bijux/agentic-proteins/blob/main/tests/regression/test_negative_results.py).  
 
 ## Failure Modes  
 Missing ablations weaken claims.  
-List drift breaks [../governance/core.md](../governance/core.md).  
-Missing evidence breaks [../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+List drift breaks [Core](../governance/core.md).  
+Missing evidence breaks [Docs Style](../meta/DOCS_STYLE.md).  
 
 ## Extension Points  
-Ablation updates follow [../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
-Extensions align with [architecture/experimental.md](../architecture/experimental.md).  
+Ablation updates follow [Docs Style](../meta/DOCS_STYLE.md).  
+Extensions align with [Experimental](../architecture/experimental.md).  
 Evidence updates align with [tests/unit/test_docs_contract.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py).  
 
 ## Exit Criteria  
 This doc is obsolete when ablations are encoded.  
-The replacement is [architecture/metrics.md](../architecture/metrics.md).  
+The replacement is [Metrics](../architecture/metrics.md).  
 Obsolete docs are removed.  
 
 Code refs: [tests/regression/test_negative_results.py](https://github.com/bijux/agentic-proteins/blob/main/tests/regression/test_negative_results.py).  

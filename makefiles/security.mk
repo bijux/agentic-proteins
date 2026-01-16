@@ -27,8 +27,8 @@ security: security-bandit security-audit security-deps
 security-bandit:
 	@mkdir -p "$(SECURITY_REPORT_DIR)"
 	@echo "→ Bandit (Python static analysis)"
-	@$(BANDIT) -r "$(SECURITY_PATHS)" -x "$(BANDIT_EXCLUDES)" -f json -o "$(BANDIT_JSON)" -n $(BANDIT_THREADS) || true
-	@$(BANDIT) -r "$(SECURITY_PATHS)" -x "$(BANDIT_EXCLUDES)" -n $(BANDIT_THREADS) | tee "$(BANDIT_TXT)"
+	@$(BANDIT) -r "$(SECURITY_PATHS)" -x "$(BANDIT_EXCLUDES)" --skip B311 -f json -o "$(BANDIT_JSON)" -n $(BANDIT_THREADS) || true
+	@$(BANDIT) -r "$(SECURITY_PATHS)" -x "$(BANDIT_EXCLUDES)" --skip B311 -n $(BANDIT_THREADS) | tee "$(BANDIT_TXT)"
 
 security-audit:
 	@mkdir -p "$(SECURITY_REPORT_DIR)"

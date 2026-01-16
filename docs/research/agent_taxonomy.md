@@ -8,8 +8,8 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc maps the system to known taxonomies.  
-Architecture context lives in [architecture/architecture.md](../architecture/architecture.md).  
-Vocabulary aligns with [../concepts/core_concepts.md](../concepts/core_concepts.md).  
+Architecture context lives in [Architecture](../architecture/architecture.md).  
+Vocabulary aligns with [Core Concepts](../concepts/core_concepts.md).  
 
 ## Contracts  
 BDI agents use belief, desire, intention loops.  
@@ -23,22 +23,22 @@ This system uses explicit signal scopes and pathway contracts.
 
 ## Invariants  
 Taxonomy mapping stays consistent.  
-Mapping aligns with [architecture/invariants.md](../architecture/invariants.md).  
+Mapping aligns with [Invariants](../architecture/invariants.md).  
 Evidence aligns with [tests/unit/test_protein_system_rigidity.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_protein_system_rigidity.py).  
 
 ## Failure Modes  
 Unstated contrasts weaken reviewability.  
-Drift in mapping breaks [../governance/core.md](../governance/core.md).  
-Unlinked references break [../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+Drift in mapping breaks [Core](../governance/core.md).  
+Unlinked references break [Docs Style](../meta/DOCS_STYLE.md).  
 
 ## Extension Points  
-Mapping updates follow [../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
-Extensions align with [architecture/experimental.md](../architecture/experimental.md).  
+Mapping updates follow [Docs Style](../meta/DOCS_STYLE.md).  
+Extensions align with [Experimental](../architecture/experimental.md).  
 Evidence updates align with [tests/unit/test_docs_contract.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py).  
 
 ## Exit Criteria  
 This doc is obsolete when mapping is encoded.  
-The replacement is [architecture/architecture.md](../architecture/architecture.md).  
+The replacement is [Architecture](../architecture/architecture.md).  
 Obsolete docs are removed.  
 
 Code refs: [tests/unit/test_protein_system_rigidity.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_protein_system_rigidity.py).  

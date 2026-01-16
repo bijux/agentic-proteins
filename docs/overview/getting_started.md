@@ -8,9 +8,9 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 Getting started defines one install and run path.  
-Read [../concepts/core_concepts.md](../concepts/core_concepts.md) for vocabulary.  
-Read [dependencies.md](../security/dependencies.md) for dependency constraints. <!-- docs/security/ -->  
-Architecture components are defined in [architecture/architecture.md](../architecture/architecture.md).  
+Read [Core Concepts](../concepts/core_concepts.md) for vocabulary.  
+Read [Dependencies](../security/dependencies.md) for dependency constraints. <!-- docs/security/ -->  
+Architecture components are defined in [Architecture](../architecture/architecture.md).  
 
 ## Contracts  
 Install with `pipx install agentic-proteins`.  
@@ -23,18 +23,18 @@ Providers return deterministic results for fixed inputs.
 CI artifacts are not tampered with between steps.  
 
 ## Failure Modes  
-Missing allowlist dependencies in [dependencies.md](../security/dependencies.md) break this path. <!-- docs/security/ -->  
-Assumptions are tracked in [threat_model.md](../security/threat_model.md). <!-- docs/security/ -->  
+Missing allowlist dependencies in [Dependencies](../security/dependencies.md) break this path. <!-- docs/security/ -->  
+Assumptions are tracked in [Threat Model](../security/threat_model.md). <!-- docs/security/ -->  
 Invalid sequences fail validation.  
 
 ## Extension Points  
-Changes update [cli/cli.md](../cli/cli.md).  
-Dependency changes update [dependencies.md](../security/dependencies.md). <!-- docs/security/ -->  
-Vocabulary changes update [../concepts/core_concepts.md](../concepts/core_concepts.md).  
+Changes update [Cli](../cli/cli.md).  
+Dependency changes update [Dependencies](../security/dependencies.md). <!-- docs/security/ -->  
+Vocabulary changes update [Core Concepts](../concepts/core_concepts.md).  
 
 ## Exit Criteria  
 This doc becomes obsolete when a generated entrypoint replaces it.  
-The replacement is [index.md](../index.md).  
+The replacement is [Index](../index.md).  
 Obsolete docs are removed.  
 
 Code refs: [tests/integration/test_cli.py](https://github.com/bijux/agentic-proteins/blob/main/tests/integration/test_cli.py).  

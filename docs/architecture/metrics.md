@@ -8,8 +8,8 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc defines the minimal metrics set.  
-Architecture components are defined in [architecture.md](architecture.md).  
-Read [execution_cost.md](execution_cost.md) for cost context.  
+Architecture components are defined in [Architecture](architecture.md).  
+Read [Execution Cost](execution_cost.md) for cost context.  
 
 ## Contracts  
 Pathway throughput is reported.  
@@ -29,13 +29,13 @@ Undefined metrics are rejected.
 Non-deterministic metrics are rejected.  
 
 ## Extension Points  
-Metric changes update [execution_cost.md](execution_cost.md).  
-Stress tests update [pathway_limits.md](pathway_limits.md).  
-Documentation updates follow [../../meta/TRIAGE.md](../meta/TRIAGE.md).  
+Metric changes update [Execution Cost](execution_cost.md).  
+Stress tests update [Pathway Limits](pathway_limits.md).  
+Documentation updates follow [Triage](../meta/TRIAGE.md).  
 
 ## Exit Criteria  
 This doc becomes obsolete when metrics are generated.  
-The replacement is [execution_cost.md](execution_cost.md).  
+The replacement is [Execution Cost](execution_cost.md).  
 Obsolete docs are removed.  
 
 Code refs: [src/agentic_proteins/biology/pathway.py](https://github.com/bijux/agentic-proteins/blob/main/src/agentic_proteins/biology/pathway.py).  

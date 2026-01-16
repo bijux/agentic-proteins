@@ -8,8 +8,8 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc provides a single schematic.  
-Architecture context lives in [architecture/architecture.md](../architecture/architecture.md).  
-Vocabulary aligns with [../concepts/core_concepts.md](../concepts/core_concepts.md).  
+Architecture context lives in [Architecture](../architecture/architecture.md).  
+Vocabulary aligns with [Core Concepts](../concepts/core_concepts.md).  
 
 ## Contracts  
 Agents exchange signals within pathway edges.  
@@ -18,23 +18,23 @@ Regulator proposals remain bounded.
 Evidence uses [tests/unit/test_protein_system_rigidity.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_protein_system_rigidity.py).  
 
 ## Invariants  
-Schematic elements stay aligned with [../governance/core.md](../governance/core.md).  
-Boundaries align with [architecture/llm_authority.md](../architecture/llm_authority.md).  
+Schematic elements stay aligned with [Core](../governance/core.md).  
+Boundaries align with [Llm Authority](../architecture/llm_authority.md).  
 Evidence aligns with [tests/unit/test_protein_system_rigidity.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_protein_system_rigidity.py).  
 
 ## Failure Modes  
 Missing boundary labels weakens reviewability.  
-Diagram drift breaks [../governance/core.md](../governance/core.md).  
-Missing evidence breaks [../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+Diagram drift breaks [Core](../governance/core.md).  
+Missing evidence breaks [Docs Style](../meta/DOCS_STYLE.md).  
 
 ## Extension Points  
-Schematic updates follow [../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
-Extensions align with [architecture/experimental.md](../architecture/experimental.md).  
+Schematic updates follow [Docs Style](../meta/DOCS_STYLE.md).  
+Extensions align with [Experimental](../architecture/experimental.md).  
 Evidence updates align with [tests/unit/test_docs_contract.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py).  
 
 ## Exit Criteria  
 This doc is obsolete when diagrams are generated.  
-The replacement is [architecture/architecture.md](../architecture/architecture.md).  
+The replacement is [Architecture](../architecture/architecture.md).  
 Obsolete docs are removed.  
 
 Code refs: [tests/unit/test_protein_system_rigidity.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_protein_system_rigidity.py).  

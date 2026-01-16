@@ -8,8 +8,8 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc defines pathway-level conservation checks.  
-Architecture components are defined in [architecture.md](architecture.md).  
-Read [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md) for structure.  
+Architecture components are defined in [Architecture](architecture.md).  
+Read [Docs Style](../meta/DOCS_STYLE.md) for structure.  
 
 ## Contracts  
 Total energy is bounded by a minimum.  
@@ -27,13 +27,13 @@ Activation mass violations raise errors.
 Resource violations raise errors.  
 
 ## Extension Points  
-Conservation changes update [metrics.md](metrics.md).  
-Contract changes update [pathway_limits.md](pathway_limits.md).  
-Documentation updates follow [../../meta/TRIAGE.md](../meta/TRIAGE.md).  
+Conservation changes update [Metrics](metrics.md).  
+Contract changes update [Pathway Limits](pathway_limits.md).  
+Documentation updates follow [Triage](../meta/TRIAGE.md).  
 
 ## Exit Criteria  
 This doc becomes obsolete when checks are generated.  
-The replacement is [architecture.md](architecture.md).  
+The replacement is [Architecture](architecture.md).  
 Obsolete docs are removed.  
 
 Code refs: [src/agentic_proteins/biology/pathway.py](https://github.com/bijux/agentic-proteins/blob/main/src/agentic_proteins/biology/pathway.py).  

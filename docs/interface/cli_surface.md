@@ -8,14 +8,14 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc defines one responsibility.  
-Architecture components are defined in [../architecture/architecture.md](../architecture/architecture.md).  
-Read [../cli/cli.md](../cli/cli.md) before edits.  
-Read [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md) for context.  
+Architecture components are defined in [Architecture](../architecture/architecture.md).  
+Read [Cli](../cli/cli.md) before edits.  
+Read [Docs Style](../meta/DOCS_STYLE.md) for context.  
 
 ## Contracts  
 Each statement is a contract.  
 Contracts align with [tests/unit/test_cli_surface_documentation.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_cli_surface_documentation.py).  
-Contracts link to [../cli/cli.md](../cli/cli.md) and [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+Contracts link to [Cli](../cli/cli.md) and [Docs Style](../meta/DOCS_STYLE.md).  
 - api  
 - api serve  
 - compare  
@@ -43,21 +43,21 @@ Contracts link to [../cli/cli.md](../cli/cli.md) and [../../meta/DOCS_STYLE.md](
 ## Invariants  
 Invariants describe stable behavior.  
 Checks align with [tests/unit/test_cli_surface_documentation.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_cli_surface_documentation.py).  
-Invariants align with [../cli/cli.md](../cli/cli.md).  
+Invariants align with [Cli](../cli/cli.md).  
 
 ## Failure Modes  
 Failures are explicit and tested.  
 Failure coverage aligns with [tests/unit/test_cli_surface_documentation.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_cli_surface_documentation.py).  
-Failures align with [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+Failures align with [Docs Style](../meta/DOCS_STYLE.md).  
 
 ## Extension Points  
 Extensions require tests and docs.  
-Extensions are tracked in [../cli/cli.md](../cli/cli.md).  
+Extensions are tracked in [Cli](../cli/cli.md).  
 Extensions align with [tests/unit/test_cli_surface_documentation.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_cli_surface_documentation.py).  
 
 ## Exit Criteria  
 This doc becomes obsolete when the surface ends.  
-The replacement is linked in [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+The replacement is linked in [Docs Style](../meta/DOCS_STYLE.md).  
 Obsolete docs are removed.  
 
 Code refs: [tests/unit/test_cli_surface_documentation.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_cli_surface_documentation.py).  

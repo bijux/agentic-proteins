@@ -8,8 +8,8 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc defines negative results scenarios.  
-Architecture components are defined in [architecture.md](architecture.md).  
-Read [metrics.md](metrics.md) for measurement context.  
+Architecture components are defined in [Architecture](architecture.md).  
+Read [Metrics](metrics.md) for measurement context.  
 
 ## Contracts  
 A cyclic pathway must fail validation.  
@@ -27,13 +27,13 @@ Missing failures invalidate tests.
 Undefined scenarios are rejected.  
 
 ## Extension Points  
-Scenario changes update [metrics.md](metrics.md).  
-Contract changes update [pathway_limits.md](pathway_limits.md).  
-Documentation updates follow [../../meta/TRIAGE.md](../meta/TRIAGE.md).  
+Scenario changes update [Metrics](metrics.md).  
+Contract changes update [Pathway Limits](pathway_limits.md).  
+Documentation updates follow [Triage](../meta/TRIAGE.md).  
 
 ## Exit Criteria  
 This doc becomes obsolete when results are generated.  
-The replacement is [metrics.md](metrics.md).  
+The replacement is [Metrics](metrics.md).  
 Obsolete docs are removed.  
 
 Code refs: [tests/regression/test_negative_results.py](https://github.com/bijux/agentic-proteins/blob/main/tests/regression/test_negative_results.py).  

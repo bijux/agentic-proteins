@@ -8,33 +8,33 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc defines one responsibility.  
-Architecture components are defined in [architecture/architecture.md](../architecture/architecture.md).  
-Read [DOCS_STYLE.md](DOCS_STYLE.md) before edits.  
-Read [SPINE.md](SPINE.md) for context.  
+Architecture components are defined in [Architecture](../architecture/architecture.md).  
+Read [Docs Style](DOCS_STYLE.md) before edits.  
+Read [Spine](SPINE.md) for context.  
 
 ## Contracts  
 Each statement is a contract.  
 Contracts align with [tests/unit/test_docs_contract.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py).  
-Contracts link to [DOCS_STYLE.md](DOCS_STYLE.md) and [SPINE.md](SPINE.md).  
+Contracts link to [Docs Style](DOCS_STYLE.md) and [Spine](SPINE.md).  
 
 ## Invariants  
 Invariants describe stable behavior.  
 Checks align with [tests/unit/test_docs_contract.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py).  
-Invariants align with [DOCS_STYLE.md](DOCS_STYLE.md).  
+Invariants align with [Docs Style](DOCS_STYLE.md).  
 
 ## Failure Modes  
 Failures are explicit and tested.  
 Failure coverage aligns with [tests/unit/test_docs_contract.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py).  
-Failures align with [SPINE.md](SPINE.md).  
+Failures align with [Spine](SPINE.md).  
 
 ## Extension Points  
 Extensions require tests and docs.  
-Extensions are tracked in [DOCS_STYLE.md](DOCS_STYLE.md).  
+Extensions are tracked in [Docs Style](DOCS_STYLE.md).  
 Extensions align with [tests/unit/test_docs_contract.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py).  
 
 ## Exit Criteria  
 This doc becomes obsolete when the surface ends.  
-The replacement is linked in [SPINE.md](SPINE.md).  
+The replacement is linked in [Spine](SPINE.md).  
 Obsolete docs are removed.  
 
 Code refs: [tests/unit/test_docs_contract.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py).  

@@ -8,8 +8,8 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 Architecture components are defined here and referenced elsewhere.  
-Read [../../concepts/core_concepts.md](../concepts/core_concepts.md) for vocabulary.  
-Read [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md) for structure.  
+Read [Core Concepts](../concepts/core_concepts.md) for vocabulary.  
+Read [Docs Style](../meta/DOCS_STYLE.md) for structure.  
 
 ## Contracts  
 The diagram below is the single source of truth.  
@@ -29,13 +29,13 @@ Missing references cause documentation mismatch.
 Broken links invalidate the diagram contract.  
 
 ## Extension Points  
-Architecture changes update [invariants.md](invariants.md).  
-Architecture changes update [execution_model.md](execution_model.md).  
-Architecture changes update [execution_lifecycle.md](execution_lifecycle.md).  
+Architecture changes update [Invariants](invariants.md).  
+Architecture changes update [Execution Model](execution_model.md).  
+Architecture changes update [Execution Lifecycle](execution_lifecycle.md).  
 
 ## Exit Criteria  
 This doc becomes obsolete when architecture is generated.  
-The replacement is [invariants.md](invariants.md).  
+The replacement is [Invariants](invariants.md).  
 Obsolete docs are removed.  
 
 Code refs: [tests/integration/test_runtime_flow.py](https://github.com/bijux/agentic-proteins/blob/main/tests/integration/test_runtime_flow.py).  

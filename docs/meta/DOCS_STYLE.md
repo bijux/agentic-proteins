@@ -8,9 +8,9 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc defines the documentation structure.  
-Architecture components are defined in [architecture/architecture.md](../architecture/architecture.md).  
-Read [DOCS_VOICE.md](DOCS_VOICE.md) for voice rules.  
-Read [TRIAGE.md](TRIAGE.md) for lifecycle rules.  
+Architecture components are defined in [Architecture](../architecture/architecture.md).  
+Read [Docs Voice](DOCS_VOICE.md) for voice rules.  
+Read [Triage](TRIAGE.md) for lifecycle rules.  
 
 ## Contracts  
 Section order is Overview, Contracts, Invariants, Failure Modes, Extension Points, Exit Criteria.  
@@ -30,7 +30,7 @@ Style violations require a rewrite.
 ## Extension Points  
 Style changes occur in this file.  
 Style changes update [scripts/check_docs_consistency.py](https://github.com/bijux/agentic-proteins/blob/main/scripts/check_docs_consistency.py).  
-Style changes update [DOCS_VOICE.md](DOCS_VOICE.md).  
+Style changes update [Docs Voice](DOCS_VOICE.md).  
 
 ## Exit Criteria  
 This doc becomes obsolete when docs are generated.  

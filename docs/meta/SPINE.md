@@ -8,78 +8,78 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc defines one responsibility.  
-Architecture components are defined in [../architecture/architecture.md](../architecture/architecture.md).  
-Read [../index.md](../index.md) before edits.  
-Read [DOCS_STYLE.md](DOCS_STYLE.md) for context.  
+Architecture components are defined in [Architecture](../architecture/architecture.md).  
+Read [Index](../index.md) before edits.  
+Read [Docs Style](DOCS_STYLE.md) for context.  
 
 ## Contracts  
 Each statement is a contract.  
 Contracts align with [mkdocs.yml](https://github.com/bijux/agentic-proteins/blob/main/mkdocs.yml).  
-Contracts link to [../index.md](../index.md) and [DOCS_STYLE.md](DOCS_STYLE.md).  
+Contracts link to [Index](../index.md) and [Docs Style](DOCS_STYLE.md).  
 
 ## Invariants  
 Invariants describe stable behavior.  
 Checks align with [mkdocs.yml](https://github.com/bijux/agentic-proteins/blob/main/mkdocs.yml).  
-Invariants align with [../index.md](../index.md).  
+Invariants align with [Index](../index.md).  
 
 ## Failure Modes  
 Failures are explicit and tested.  
 Failure coverage aligns with [mkdocs.yml](https://github.com/bijux/agentic-proteins/blob/main/mkdocs.yml).  
-Failures align with [DOCS_STYLE.md](DOCS_STYLE.md).  
+Failures align with [Docs Style](DOCS_STYLE.md).  
 
 ## Extension Points  
 Extensions require tests and docs.  
-Extensions are tracked in [../index.md](../index.md).  
+Extensions are tracked in [Index](../index.md).  
 Extensions align with [mkdocs.yml](https://github.com/bijux/agentic-proteins/blob/main/mkdocs.yml).  
 
 ## Exit Criteria  
 This doc becomes obsolete when the surface ends.  
-The replacement is linked in [DOCS_STYLE.md](DOCS_STYLE.md).  
+The replacement is linked in [Docs Style](DOCS_STYLE.md).  
 Obsolete docs are removed.  
 
 Code refs: [tests/unit/test_docs_contract.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py).  
 Docs list:  
-- [meta/DOCS_STYLE.md](DOCS_STYLE.md)  
-- [meta/DOCS_VOICE.md](DOCS_VOICE.md)  
-- [meta/NAMING.md](NAMING.md)  
-- [meta/TRIAGE.md](TRIAGE.md)  
-- [meta/SPINE.md](SPINE.md)  
-- [index.md](../index.md)  
-- [overview/getting_started.md](../overview/getting_started.md)  
-- [concepts/core_concepts.md](../concepts/core_concepts.md)  
-- [governance/core.md](../governance/core.md)  
-- [governance/semver.md](../governance/semver.md)  
-- [governance/anti_patterns.md](../governance/anti_patterns.md)  
-- [governance/roadmap_ceiling.md](../governance/roadmap_ceiling.md)  
-- [governance/positioning.md](../governance/positioning.md)  
-- [governance/release_identity.md](../governance/release_identity.md)  
-- [research/agentic_criteria.md](../research/agentic_criteria.md)  
-- [research/agent_taxonomy.md](../research/agent_taxonomy.md)  
-- [research/formal_model.md](../research/formal_model.md)  
-- [research/falsifiable_claim.md](../research/falsifiable_claim.md)  
-- [research/decisive_experiment.md](../research/decisive_experiment.md)  
-- [research/ablation_studies.md](../research/ablation_studies.md)  
-- [research/neutral_results.md](../research/neutral_results.md)  
-- [research/reviewer_premortem.md](../research/reviewer_premortem.md)  
-- [research/system_schematic.md](../research/system_schematic.md)  
-- [externalization/mpi.md](../externalization/mpi.md)  
-- [externalization/golden_path.md](../externalization/golden_path.md)  
-- [externalization/misuse_guards.md](../externalization/misuse_guards.md)  
-- [externalization/surface_area.md](../externalization/surface_area.md)  
-- [externalization/sandbox.md](../externalization/sandbox.md)  
-- [externalization/invariant_visualization.md](../externalization/invariant_visualization.md)  
-- [externalization/why_not_x.md](../externalization/why_not_x.md)  
-- [architecture/architecture.md](../architecture/architecture.md)  
-- [architecture/invariants.md](../architecture/invariants.md)  
-- [architecture/experimental.md](../architecture/experimental.md)  
-- [architecture/llm_authority.md](../architecture/llm_authority.md)  
-- [architecture/execution_model.md](../architecture/execution_model.md)  
-- [architecture/execution_lifecycle.md](../architecture/execution_lifecycle.md)  
-- [architecture/design_debt.md](../architecture/design_debt.md)  
-- [cli/cli.md](../cli/cli.md)  
-- [interface/cli_surface.md](../interface/cli_surface.md)  
-- [api/overview.md](../api/overview.md)  
-- [api/schema.md](../api/schema.md)  
-- [security/dependencies.md](../security/dependencies.md)  
-- [security/threat_model.md](../security/threat_model.md)  
-- [security/citation.md](../security/citation.md)  
+- [Docs Style](DOCS_STYLE.md)  
+- [Docs Voice](DOCS_VOICE.md)  
+- [Naming](NAMING.md)  
+- [Triage](TRIAGE.md)  
+- [Spine](SPINE.md)  
+- [Index](../index.md)  
+- [Getting Started](../overview/getting_started.md)  
+- [Core Concepts](../concepts/core_concepts.md)  
+- [Core](../governance/core.md)  
+- [Semver](../governance/semver.md)  
+- [Anti Patterns](../governance/anti_patterns.md)  
+- [Roadmap Ceiling](../governance/roadmap_ceiling.md)  
+- [Positioning](../governance/positioning.md)  
+- [Release Identity](../governance/release_identity.md)  
+- [Agentic Criteria](../research/agentic_criteria.md)  
+- [Agent Taxonomy](../research/agent_taxonomy.md)  
+- [Formal Model](../research/formal_model.md)  
+- [Falsifiable Claim](../research/falsifiable_claim.md)  
+- [Decisive Experiment](../research/decisive_experiment.md)  
+- [Ablation Studies](../research/ablation_studies.md)  
+- [Neutral Results](../research/neutral_results.md)  
+- [Reviewer Premortem](../research/reviewer_premortem.md)  
+- [System Schematic](../research/system_schematic.md)  
+- [Mpi](../externalization/mpi.md)  
+- [Golden Path](../externalization/golden_path.md)  
+- [Misuse Guards](../externalization/misuse_guards.md)  
+- [Surface Area](../externalization/surface_area.md)  
+- [Sandbox](../externalization/sandbox.md)  
+- [Invariant Visualization](../externalization/invariant_visualization.md)  
+- [Why Not X](../externalization/why_not_x.md)  
+- [Architecture](../architecture/architecture.md)  
+- [Invariants](../architecture/invariants.md)  
+- [Experimental](../architecture/experimental.md)  
+- [Llm Authority](../architecture/llm_authority.md)  
+- [Execution Model](../architecture/execution_model.md)  
+- [Execution Lifecycle](../architecture/execution_lifecycle.md)  
+- [Design Debt](../architecture/design_debt.md)  
+- [Cli](../cli/cli.md)  
+- [Cli Surface](../interface/cli_surface.md)  
+- [Overview](../api/overview.md)  
+- [Schema](../api/schema.md)  
+- [Dependencies](../security/dependencies.md)  
+- [Threat Model](../security/threat_model.md)  
+- [Citation](../security/citation.md)  

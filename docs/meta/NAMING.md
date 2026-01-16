@@ -8,9 +8,9 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc defines canonical names.  
-Architecture components are defined in [architecture/architecture.md](../architecture/architecture.md).  
-Read [DOCS_STYLE.md](DOCS_STYLE.md) before edits.  
-Read [DOCS_VOICE.md](DOCS_VOICE.md) for voice rules.  
+Architecture components are defined in [Architecture](../architecture/architecture.md).  
+Read [Docs Style](DOCS_STYLE.md) before edits.  
+Read [Docs Voice](DOCS_VOICE.md) for voice rules.  
 
 ## Contracts  
 Canonical names are listed below.  
@@ -30,7 +30,7 @@ Undefined names fail reviews.
 ## Extension Points  
 Naming changes occur in this file.  
 Naming changes update [scripts/check_docs_consistency.py](https://github.com/bijux/agentic-proteins/blob/main/scripts/check_docs_consistency.py).  
-Naming changes update [TRIAGE.md](TRIAGE.md).  
+Naming changes update [Triage](TRIAGE.md).  
 
 ## Exit Criteria  
 This doc becomes obsolete when naming is generated.  

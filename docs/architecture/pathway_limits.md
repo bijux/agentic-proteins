@@ -8,8 +8,8 @@ Why: This doc exists to record its single responsibility for review.
 
 ## Overview  
 This doc defines pathway interaction limits.  
-Architecture components are defined in [architecture.md](architecture.md).  
-Read [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md) for structure.  
+Architecture components are defined in [Architecture](architecture.md).  
+Read [Docs Style](../meta/DOCS_STYLE.md) for structure.  
 
 ## Contracts  
 Incoming signals per tick are capped.  
@@ -27,13 +27,13 @@ Silent overflow is rejected.
 Cycles are blocked by contract rules.  
 
 ## Extension Points  
-Limit changes update [execution_cost.md](execution_cost.md).  
-Contract changes update [architecture.md](architecture.md).  
-Documentation updates follow [../../meta/TRIAGE.md](../meta/TRIAGE.md).  
+Limit changes update [Execution Cost](execution_cost.md).  
+Contract changes update [Architecture](architecture.md).  
+Documentation updates follow [Triage](../meta/TRIAGE.md).  
 
 ## Exit Criteria  
 This doc becomes obsolete when limits are generated.  
-The replacement is [architecture.md](architecture.md).  
+The replacement is [Architecture](architecture.md).  
 Obsolete docs are removed.  
 
 Code refs: [src/agentic_proteins/biology/pathway.py](https://github.com/bijux/agentic-proteins/blob/main/src/agentic_proteins/biology/pathway.py).  
