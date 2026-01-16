@@ -25,6 +25,7 @@ COVCFG_ABS            := $(abspath config/coveragerc.ini)
 COV_HTML_ABS          := $(abspath $(TEST_ARTIFACTS_DIR)/htmlcov)
 CACHE_DIR_ABS         := $(abspath $(TEST_ARTIFACTS_DIR)/.pytest_cache)
 COV_XML_ABS           := $(abspath $(TEST_ARTIFACTS_DIR)/coverage.xml)
+COV_DATA_ABS          := $(abspath $(TEST_ARTIFACTS_DIR)/.coverage)
 
 TEST_PATHS_ABS        := $(abspath $(TEST_PATHS))
 TEST_PATHS_UNIT_ABS   := $(abspath $(TEST_PATHS_UNIT))
@@ -67,6 +68,7 @@ test:
 	( cd "$(TEST_ARTIFACTS_DIR)" && \
 	  PYTHONPATH="$(SRC_ABS)$${PYTHONPATH:+:$${PYTHONPATH}}" \
 	  HYPOTHESIS_DATABASE_DIRECTORY="$(HYPOTHESIS_DB_ABS)" \
+	  COVERAGE_FILE="$(COV_DATA_ABS)" \
 	  sh -c '$(PYTEST) -c "$(PYTEST_INI_ABS)" "$(TEST_PATHS_ABS)" -m "not real_local" $(PYTEST_FLAGS) '"$$BENCH_FLAGS" )
 	@rm -rf .hypothesis .benchmarks || true
 
@@ -88,6 +90,7 @@ test-e2e:
 	  ( cd "$(TEST_ARTIFACTS_DIR)" && \
 	    PYTHONPATH="$(SRC_ABS)$${PYTHONPATH:+:$${PYTHONPATH}}" \
 	    HYPOTHESIS_DATABASE_DIRECTORY="$(HYPOTHESIS_DB_ABS)" \
+	    COVERAGE_FILE="$(COV_DATA_ABS)" \
 	    sh -c '$(PYTEST) -c "$(PYTEST_INI_ABS)" "$(TEST_PATHS_E2E_ABS)" -m "e2e" --maxfail=1 -q $(PYTEST_FLAGS)' ); \
 	else \
 	  echo "   • no $(TEST_PATHS_E2E); skipping"; \
@@ -111,6 +114,7 @@ test-evaluation:
 	  ( cd "$(TEST_ARTIFACTS_DIR)" && \
 	    PYTHONPATH="$(SRC_ABS)$${PYTHONPATH:+:$${PYTHONPATH}}" \
 	    HYPOTHESIS_DATABASE_DIRECTORY="$(HYPOTHESIS_DB_ABS)" \
+	    COVERAGE_FILE="$(COV_DATA_ABS)" \
 	    sh -c '$(PYTEST) -c "$(PYTEST_INI_ABS)" "$(TEST_PATHS_EVAL_ABS)" -m "evaluation" --maxfail=1 -q $(PYTEST_FLAGS)' ); \
 	else \
 	  echo "   • no $(TEST_PATHS_EVAL); skipping"; \
@@ -120,6 +124,7 @@ test-evaluation:
 	  ( cd "$(TEST_ARTIFACTS_DIR)" && \
 	    PYTHONPATH="$(SRC_ABS)$${PYTHONPATH:+:$${PYTHONPATH}}" \
 	    HYPOTHESIS_DATABASE_DIRECTORY="$(HYPOTHESIS_DB_ABS)" \
+	    COVERAGE_FILE="$(COV_DATA_ABS)" \
 	    sh -c '$(PYTEST) -c "$(PYTEST_INI_ABS)" "$(TEST_PATHS_REGRESSION_ABS)" -m "regression" --maxfail=1 -q $(PYTEST_FLAGS)' ); \
 	else \
 	  echo "   • no $(TEST_PATHS_REGRESSION); skipping"; \
@@ -143,12 +148,14 @@ test-ci: test-unit test-e2e test-regression test-evaluation
 	  ( cd "$(TEST_ARTIFACTS_DIR)" && \
 	    PYTHONPATH="$(SRC_ABS)$${PYTHONPATH:+:$${PYTHONPATH}}" \
 	    HYPOTHESIS_DATABASE_DIRECTORY="$(HYPOTHESIS_DB_ABS)" \
+	    COVERAGE_FILE="$(COV_DATA_ABS)" \
 	    sh -c '$(PYTEST) -c "$(PYTEST_INI_ABS)" "$(TEST_PATHS_UNIT_ABS)" -m "not slow" --maxfail=1 -q $(PYTEST_FLAGS) '"$$BENCH_FLAGS" ); \
 	else \
 	  echo "   • no $(TEST_PATHS_UNIT); excluding e2e/integration/functional/slow"; \
 	  ( cd "$(TEST_ARTIFACTS_DIR)" && \
 	    PYTHONPATH="$(SRC_ABS)$${PYTHONPATH:+:$${PYTHONPATH}}" \
 	    HYPOTHESIS_DATABASE_DIRECTORY="$(HYPOTHESIS_DB_ABS)" \
+	    COVERAGE_FILE="$(COV_DATA_ABS)" \
 	    sh -c '$(PYTEST) -c "$(PYTEST_INI_ABS)" "$(TEST_PATHS_ABS)" -k "not e2e and not integration and not functional" -m "not slow" --maxfail=1 -q $(PYTEST_FLAGS) '"$$BENCH_FLAGS" ); \
 	fi
 	@rm -rf .hypothesis .benchmarks || true

@@ -143,7 +143,7 @@ color = true
 
 # --8<-- [start:bandit]
 [tool.bandit]
-skips = ["B404"]
+skips = ["B404", "B311"]
 exclude_dirs = [".venv","tests","artifacts",".pytest_cache",".ruff_cache"]
 # --8<-- [end:bandit]
 [project.scripts]

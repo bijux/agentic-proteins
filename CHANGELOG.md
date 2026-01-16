@@ -8,15 +8,15 @@ This project adheres to [Semantic Versioning](https://semver.org) and the
 <a id="unreleased"></a>  
 ## [Unreleased]  
 
-<!-- unreleased start -->  
-### Added  
-* (add new entries via fragments in `changelog.d/`)  
+<!-- unreleased start -->
+### Added
+* (add new entries via fragments in `changelog.d/`)
 
-### Changed  
-* (add here)  
+### Changed
+* (add here)
 
-### Fixed  
-* (add here)  
+### Fixed
+* (add here)
 <!-- unreleased end -->  
 
 [Back to top](#top)  

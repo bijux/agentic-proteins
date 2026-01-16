@@ -36,9 +36,9 @@ ALL_API_SCHEMAS       := $(shell find api -type f \( -name '*.yaml' -o -name '*.
 ALL_API_SCHEMAS_ABS   := $(abspath $(ALL_API_SCHEMAS))
 
 # Python CLIs (prefer ACT if present)
-PRANCE                  := $(ACT)/prance
-OPENAPI_SPEC_VALIDATOR  := $(ACT)/openapi-spec-validator
-SCHEMATHESIS            := $(ACT)/schemathesis
+PRANCE                  := $(if $(ACT),$(ACT)/prance,prance)
+OPENAPI_SPEC_VALIDATOR  := $(if $(ACT),$(ACT)/openapi-spec-validator,openapi-spec-validator)
+SCHEMATHESIS            := $(if $(ACT),$(ACT)/schemathesis,schemathesis)
 SCHEMATHESIS_OPTS ?= \
   --checks=all --max-failures=1 \
   --report junit --report-junit-path $(SCHEMATHESIS_JUNIT_ABS) \
