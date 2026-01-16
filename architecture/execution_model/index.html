@@ -2584,8 +2584,8 @@
 Why: This doc exists to record its single responsibility for review.  </p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>This doc defines deterministic and agentic boundaries.<br />
-Read <a href="../architecture/">architecture.md</a> for component context.<br />
-Read <a href="../../concepts/core_concepts/">../../concepts/core_concepts.md</a> for vocabulary.  </p>
+Read <a href="../architecture/">Architecture</a> for component context.<br />
+Read <a href="../../concepts/core_concepts/">Core Concepts</a> for vocabulary.  </p>
 <h2 id="contracts">Contracts<a class="headerlink" href="#contracts" title="Permanent link">&para;</a></h2>
 <p>Deterministic behavior covers state transitions and artifact hashing.<br />
 The execution contract is recorded in <a href="https://github.com/bijux/agentic-proteins/blob/main/src/agentic_proteins/core/contracts.py">src/agentic_proteins/core/contracts.py</a>.<br />
@@ -2593,18 +2593,18 @@ Agentic behavior is limited to provider outputs and selection.  </p>
 <h2 id="invariants">Invariants<a class="headerlink" href="#invariants" title="Permanent link">&para;</a></h2>
 <p>Deterministic paths use fixed inputs and seeds.<br />
 Agentic paths record every decision and output.<br />
-Boundaries align with <a href="../invariants/">invariants.md</a>.  </p>
+Boundaries align with <a href="../invariants/">Invariants</a>.  </p>
 <h2 id="failure-modes">Failure Modes<a class="headerlink" href="#failure-modes" title="Permanent link">&para;</a></h2>
 <p>Untracked stochastic output breaks reproducibility.<br />
 Missing logs break traceability.<br />
-Boundary drift breaks <a href="../architecture/">architecture.md</a>.  </p>
+Boundary drift breaks <a href="../architecture/">Architecture</a>.  </p>
 <h2 id="extension-points">Extension Points<a class="headerlink" href="#extension-points" title="Permanent link">&para;</a></h2>
-<p>Boundary changes update <a href="../execution_lifecycle/">execution_lifecycle.md</a>.<br />
-Boundary changes update <a href="../invariants/">invariants.md</a>.<br />
-Boundary changes update <a href="../../concepts/core_concepts/">../../concepts/core_concepts.md</a>.  </p>
+<p>Boundary changes update <a href="../execution_lifecycle/">Execution Lifecycle</a>.<br />
+Boundary changes update <a href="../invariants/">Invariants</a>.<br />
+Boundary changes update <a href="../../concepts/core_concepts/">Core Concepts</a>.  </p>
 <h2 id="exit-criteria">Exit Criteria<a class="headerlink" href="#exit-criteria" title="Permanent link">&para;</a></h2>
 <p>This doc becomes obsolete when execution is generated.<br />
-The replacement is <a href="../architecture/">architecture.md</a>.<br />
+The replacement is <a href="../architecture/">Architecture</a>.<br />
 Obsolete docs are removed.  </p>
 <p>Code refs: <a href="https://github.com/bijux/agentic-proteins/blob/main/tests/regression/test_architecture_invariants.py">tests/regression/test_architecture_invariants.py</a>.  </p>
 

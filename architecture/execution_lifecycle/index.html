@@ -2584,8 +2584,8 @@
 Why: This doc exists to record its single responsibility for review.  </p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>This doc defines the execution lifecycle state machine.<br />
-Read <a href="../architecture/">architecture.md</a> for component context.<br />
-Read <a href="../../concepts/core_concepts/">../../concepts/core_concepts.md</a> for vocabulary.  </p>
+Read <a href="../architecture/">Architecture</a> for component context.<br />
+Read <a href="../../concepts/core_concepts/">Core Concepts</a> for vocabulary.  </p>
 <h2 id="contracts">Contracts<a class="headerlink" href="#contracts" title="Permanent link">&para;</a></h2>
 <p>States and transitions are listed below.<br />
 The lifecycle uses a single linear progression.<br />
@@ -2599,18 +2599,18 @@ Deviations are failures.<br />
 <h2 id="invariants">Invariants<a class="headerlink" href="#invariants" title="Permanent link">&para;</a></h2>
 <p>State order is init, plan, act, observe, evaluate, terminate.<br />
 Each execution unit records its state.<br />
-Transitions align with <a href="../execution_model/">execution_model.md</a>.  </p>
+Transitions align with <a href="../execution_model/">Execution Model</a>.  </p>
 <h2 id="failure-modes">Failure Modes<a class="headerlink" href="#failure-modes" title="Permanent link">&para;</a></h2>
 <p>Out-of-order transitions break traceability.<br />
 Missing states break evaluation artifact records.<br />
-Lifecycle drift breaks <a href="../architecture/">architecture.md</a>.  </p>
+Lifecycle drift breaks <a href="../architecture/">Architecture</a>.  </p>
 <h2 id="extension-points">Extension Points<a class="headerlink" href="#extension-points" title="Permanent link">&para;</a></h2>
-<p>Lifecycle changes update <a href="../execution_model/">execution_model.md</a>.<br />
-Lifecycle changes update <a href="../invariants/">invariants.md</a>.<br />
-Lifecycle changes update <a href="../../concepts/core_concepts/">../../concepts/core_concepts.md</a>.  </p>
+<p>Lifecycle changes update <a href="../execution_model/">Execution Model</a>.<br />
+Lifecycle changes update <a href="../invariants/">Invariants</a>.<br />
+Lifecycle changes update <a href="../../concepts/core_concepts/">Core Concepts</a>.  </p>
 <h2 id="exit-criteria">Exit Criteria<a class="headerlink" href="#exit-criteria" title="Permanent link">&para;</a></h2>
 <p>This doc becomes obsolete when execution is generated.<br />
-The replacement is <a href="../architecture/">architecture.md</a>.<br />
+The replacement is <a href="../architecture/">Architecture</a>.<br />
 Obsolete docs are removed.  </p>
 <p>Code refs: <a href="https://github.com/bijux/agentic-proteins/blob/main/tests/integration/test_runtime_flow.py">tests/integration/test_runtime_flow.py</a>.  </p>
 

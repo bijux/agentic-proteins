@@ -2584,8 +2584,8 @@
 Why: This doc exists to record its single responsibility for review.  </p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>This doc lists the MPI entry points.<br />
-MPI scope aligns with <a href="../../governance/core/">../governance/core.md</a>.<br />
-Usage context lives in <a href="../golden_path/">golden_path.md</a>.  </p>
+MPI scope aligns with <a href="../../governance/core/">Core</a>.<br />
+Usage context lives in <a href="../golden_path/">Golden Path</a>.  </p>
 <h2 id="contracts">Contracts<a class="headerlink" href="#contracts" title="Permanent link">&para;</a></h2>
 <p>Entry point: <a href="https://github.com/bijux/agentic-proteins/blob/main/src/agentic_proteins/interfaces/cli.py">CLI</a>. Input is CLI arguments. Output is exit status and workspace artifacts.<br />
 Entry point: <a href="https://github.com/bijux/agentic-proteins/blob/main/src/agentic_proteins/runtime/control/execution.py">RunManager</a>. Input is a run directory and config. Output is a run result mapping.<br />
@@ -2594,20 +2594,20 @@ Entry point: <a href="https://github.com/bijux/agentic-proteins/blob/main/src/ag
 Entry point: <a href="https://github.com/bijux/agentic-proteins/blob/main/src/agentic_proteins/biology/signals.py">SignalPayload</a>. Input is typed fields (source_id, targets, signal_type via SignalType, magnitude). Output is a validated payload instance.<br />
 Intentionally inaccessible: runtime control, execution runtime, and registry internals.  </p>
 <h2 id="invariants">Invariants<a class="headerlink" href="#invariants" title="Permanent link">&para;</a></h2>
-<p>MPI size is capped by <a href="../surface_area/">surface_area.md</a>.<br />
-MPI meaning aligns with <a href="../../concepts/core_concepts/">../concepts/core_concepts.md</a>.<br />
-MPI changes require <a href="../../architecture/invariants/">architecture/invariants.md</a>.  </p>
+<p>MPI size is capped by <a href="../surface_area/">Surface Area</a>.<br />
+MPI meaning aligns with <a href="../../concepts/core_concepts/">Core Concepts</a>.<br />
+MPI changes require <a href="../../architecture/invariants/">Invariants</a>.  </p>
 <h2 id="failure-modes">Failure Modes<a class="headerlink" href="#failure-modes" title="Permanent link">&para;</a></h2>
-<p>MPI expansion breaks <a href="../surface_area/">surface_area.md</a>.<br />
-Hidden entry points break <a href="../../governance/core/">../governance/core.md</a>.<br />
-Unlinked usage breaks <a href="../../meta/DOCS_STYLE/">../meta/DOCS_STYLE.md</a>.  </p>
+<p>MPI expansion breaks <a href="../surface_area/">Surface Area</a>.<br />
+Hidden entry points break <a href="../../governance/core/">Core</a>.<br />
+Unlinked usage breaks <a href="../../meta/DOCS_STYLE/">Docs Style</a>.  </p>
 <h2 id="extension-points">Extension Points<a class="headerlink" href="#extension-points" title="Permanent link">&para;</a></h2>
-<p>Extension rules live in <a href="../../architecture/experimental/">architecture/experimental.md</a>.<br />
-Playground usage is described in <a href="../sandbox/">sandbox.md</a>.<br />
-Review rules align with <a href="../../meta/TRIAGE/">../meta/TRIAGE.md</a>.  </p>
+<p>Extension rules live in <a href="../../architecture/experimental/">Experimental</a>.<br />
+Playground usage is described in <a href="../sandbox/">Sandbox</a>.<br />
+Review rules align with <a href="../../meta/TRIAGE/">Triage</a>.  </p>
 <h2 id="exit-criteria">Exit Criteria<a class="headerlink" href="#exit-criteria" title="Permanent link">&para;</a></h2>
 <p>This doc is obsolete when MPI is generated.<br />
-The replacement is <a href="../surface_area/">surface_area.md</a>.<br />
+The replacement is <a href="../surface_area/">Surface Area</a>.<br />
 Obsolete docs are removed.  </p>
 <p>Code refs: <a href="https://github.com/bijux/agentic-proteins/blob/main/src/agentic_proteins/core/surface_area.py">src/agentic_proteins/core/surface_area.py</a>.  </p>
 

@@ -2579,9 +2579,9 @@
 Why: This doc exists to record its single responsibility for review.  </p>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Getting started defines one install and run path.<br />
-Read <a href="../../concepts/core_concepts/">../concepts/core_concepts.md</a> for vocabulary.<br />
-Read <a href="../../security/dependencies/">dependencies.md</a> for dependency constraints. <!-- docs/security/ --><br />
-Architecture components are defined in <a href="../../architecture/architecture/">architecture/architecture.md</a>.  </p>
+Read <a href="../../concepts/core_concepts/">Core Concepts</a> for vocabulary.<br />
+Read <a href="../../security/dependencies/">Dependencies</a> for dependency constraints. <!-- docs/security/ --><br />
+Architecture components are defined in <a href="../../architecture/architecture/">Architecture</a>.  </p>
 <h2 id="contracts">Contracts<a class="headerlink" href="#contracts" title="Permanent link">&para;</a></h2>
 <p>Install with <code>pipx install agentic-proteins</code>.<br />
 Run with <code>agentic-proteins run --sequence "ACDEFGHIKLMNPQRSTVWY"</code>.<br />
@@ -2591,16 +2591,16 @@ Artifacts are stored under <code>artifacts/&lt;run_id&gt;/</code>.  </p>
 Providers return deterministic results for fixed inputs.<br />
 CI artifacts are not tampered with between steps.  </p>
 <h2 id="failure-modes">Failure Modes<a class="headerlink" href="#failure-modes" title="Permanent link">&para;</a></h2>
-<p>Missing allowlist dependencies in <a href="../../security/dependencies/">dependencies.md</a> break this path. <!-- docs/security/ --><br />
-Assumptions are tracked in <a href="../../security/threat_model/">threat_model.md</a>. <!-- docs/security/ --><br />
+<p>Missing allowlist dependencies in <a href="../../security/dependencies/">Dependencies</a> break this path. <!-- docs/security/ --><br />
+Assumptions are tracked in <a href="../../security/threat_model/">Threat Model</a>. <!-- docs/security/ --><br />
 Invalid sequences fail validation.  </p>
 <h2 id="extension-points">Extension Points<a class="headerlink" href="#extension-points" title="Permanent link">&para;</a></h2>
-<p>Changes update <a href="../../cli/cli/">cli/cli.md</a>.<br />
-Dependency changes update <a href="../../security/dependencies/">dependencies.md</a>. <!-- docs/security/ --><br />
-Vocabulary changes update <a href="../../concepts/core_concepts/">../concepts/core_concepts.md</a>.  </p>
+<p>Changes update <a href="../../cli/cli/">Cli</a>.<br />
+Dependency changes update <a href="../../security/dependencies/">Dependencies</a>. <!-- docs/security/ --><br />
+Vocabulary changes update <a href="../../concepts/core_concepts/">Core Concepts</a>.  </p>
 <h2 id="exit-criteria">Exit Criteria<a class="headerlink" href="#exit-criteria" title="Permanent link">&para;</a></h2>
 <p>This doc becomes obsolete when a generated entrypoint replaces it.<br />
-The replacement is <a href="../../">index.md</a>.<br />
+The replacement is <a href="../../">Index</a>.<br />
 Obsolete docs are removed.  </p>
 <p>Code refs: <a href="https://github.com/bijux/agentic-proteins/blob/main/tests/integration/test_cli.py">tests/integration/test_cli.py</a>.  </p>
 

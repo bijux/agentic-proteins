@@ -2587,33 +2587,33 @@ Citation artifacts are generated via <a href="https://github.com/bijux/agentic-p
 <h2 id="contracts">Contracts<a class="headerlink" href="#contracts" title="Permanent link">&para;</a></h2>
 <p>Each statement is a contract.<br />
 Contracts align with <a href="https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py">tests/unit/test_docs_contract.py</a>.<br />
-Contracts link to <a href="../threat_model/">threat_model.md</a> and <a href="../dependencies/">dependencies.md</a>.<br />
+Contracts link to <a href="../threat_model/">Threat Model</a> and <a href="../dependencies/">Dependencies</a>.<br />
 - <code>CITATION.cff</code> is the canonical source of citation metadata.<br />
 - <code>make citation</code> validates CFF and produces the other formats.<br />
 - Release tags align with <code>CITATION.cff</code> version values.  </p>
 <h2 id="invariants">Invariants<a class="headerlink" href="#invariants" title="Permanent link">&para;</a></h2>
 <p>Invariants describe stable behavior.<br />
 Checks align with <a href="https://github.com/bijux/agentic-proteins/blob/main/scripts/check_changelog_version.py">scripts/check_changelog_version.py</a>.<br />
-Invariants align with <a href="../dependencies/">dependencies.md</a>.<br />
+Invariants align with <a href="../dependencies/">Dependencies</a>.<br />
 - Citation metadata uses the repository URL and SPDX license.<br />
 - Authors list includes the canonical ORCID record.<br />
 - Citation artifacts stay in sync with <code>CITATION.cff</code>.  </p>
 <h2 id="failure-modes">Failure Modes<a class="headerlink" href="#failure-modes" title="Permanent link">&para;</a></h2>
 <p>Failures are explicit and tested.<br />
 Failure coverage aligns with <a href="https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py">tests/unit/test_docs_contract.py</a>.<br />
-Failures align with <a href="../../meta/DOCS_STYLE/">../../meta/DOCS_STYLE.md</a>.<br />
+Failures align with <a href="../../meta/DOCS_STYLE/">Docs Style</a>.<br />
 - Release metadata drift triggers a CI failure.<br />
 - Missing citation files block release publishing.<br />
 - Invalid CFF schema fails validation.  </p>
 <h2 id="extension-points">Extension Points<a class="headerlink" href="#extension-points" title="Permanent link">&para;</a></h2>
 <p>Extensions require tests and docs.<br />
-Extensions are tracked in <a href="../dependencies/">dependencies.md</a>.<br />
+Extensions are tracked in <a href="../dependencies/">Dependencies</a>.<br />
 Extensions align with <a href="https://github.com/bijux/agentic-proteins/blob/main/scripts/check_changelog_version.py">scripts/check_changelog_version.py</a>.<br />
 - New citation formats require updates to <code>makefiles/citation.mk</code>.<br />
 - New metadata fields require <code>CITATION.cff</code> changes.  </p>
 <h2 id="exit-criteria">Exit Criteria<a class="headerlink" href="#exit-criteria" title="Permanent link">&para;</a></h2>
 <p>This doc becomes obsolete when citation artifacts are generated elsewhere.<br />
-The replacement is linked in <a href="../../meta/DOCS_STYLE/">../../meta/DOCS_STYLE.md</a>.<br />
+The replacement is linked in <a href="../../meta/DOCS_STYLE/">Docs Style</a>.<br />
 Obsolete docs are removed.  </p>
 <p>Code refs: <a href="https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_docs_contract.py">tests/unit/test_docs_contract.py</a>.  </p>
 
