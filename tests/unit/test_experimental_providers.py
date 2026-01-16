@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import sys
 from types import SimpleNamespace
 from typing import Any
@@ -31,8 +31,9 @@ def test_sleep_with_retry_after_uses_retry_after(
     monkeypatch.setattr(
         _async_utils.secrets.SystemRandom, "random", lambda _self: 0.0
     )
+    deadline = _async_utils.time.time() + 10.0
     backoff, slept = _async_utils.sleep_with_retry_after(
-        deadline=10.0, backoff=1.0, retry_after=3.0
+        deadline=deadline, backoff=1.0, retry_after=3.0
     )
     assert backoff > 1.0
     assert slept == 3.0
@@ -42,7 +43,7 @@ def test_sleep_with_retry_after_uses_retry_after(
 class _FakeResponse:
     status_code: int
     payload: dict[str, Any]
-    headers: dict[str, str] | None = None
+    headers: dict[str, str] = field(default_factory=dict)
 
     def json(self) -> dict[str, Any]:
         return self.payload
