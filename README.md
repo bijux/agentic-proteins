@@ -1,44 +1,227 @@
-# Agentic Proteins  
+# Agentic Proteins
+<a id="top"></a>
 
-A deterministic, artifact-first protein design runtime and CLI with enforced invariants, reproducible runs, and strict execution boundaries.  
+**A deterministic, artifact-first protein design runtime and CLI** — strict invariants, reproducible runs, and traceable outputs. Build reliable design workflows that are audit-ready and repeatable.
 
-[![PyPI](https://img.shields.io/pypi/v/agentic-proteins.svg)](https://pypi.org/project/agentic-proteins/) 
-[![Python Version](https://img.shields.io/pypi/pyversions/agentic-proteins.svg)](https://pypi.org/project/agentic-proteins/) 
-[![Typing: typed](https://img.shields.io/badge/typing-typed-2b6cb0.svg)](https://peps.python.org/pep-0561/) 
-[![License](https://img.shields.io/badge/license-Apache--2.0-green.svg)](https://github.com/bijux/agentic-proteins/blob/main/LICENSE) 
-[![Documentation](https://img.shields.io/badge/docs-mkdocs-blue.svg)](https://bijux.github.io/agentic-proteins/) 
-[![CI](https://github.com/bijux/agentic-proteins/actions/workflows/ci.yml/badge.svg)](https://github.com/bijux/agentic-proteins/actions/workflows/ci.yml)  
+[![PyPI - Version](https://img.shields.io/pypi/v/agentic-proteins.svg)](https://pypi.org/project/agentic-proteins/)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://pypi.org/project/agentic-proteins/)
+[![Typing: typed (PEP 561)](https://img.shields.io/badge/typing-typed-4F8CC9.svg)](https://peps.python.org/pep-0561/)
+[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-green.svg)](https://github.com/bijux/agentic-proteins/blob/main/LICENSE)
+[![Documentation](https://img.shields.io/badge/docs-GitHub%20Pages-brightgreen)](https://bijux.github.io/agentic-proteins/)
+[![CI Status](https://github.com/bijux/agentic-proteins/actions/workflows/ci.yml/badge.svg)](https://github.com/bijux/agentic-proteins/actions)
 
-> **At a glance**: deterministic execution • artifact immutability • reproducible runs • invariant enforcement • API + CLI surfaces • structured telemetry  
-> **Quality**: coverage floors enforced per module, benchmark regression gate active, docs linted and built in CI, no telemetry.  
+> **At a glance:** deterministic execution • artifact immutability • invariant enforcement • reproducible runs • API + CLI surfaces • structured telemetry  
+> **Quality:** coverage floors enforced per module, benchmark regression gate active, docs linted and built in CI, no telemetry.
 
-## Overview  
-Agentic Proteins is a deterministic, artifact-first protein design runtime and CLI.  
-Architecture components are defined in [docs/architecture/architecture.md](docs/architecture/architecture.md).  
-Read [docs/meta/DOCS_STYLE.md](docs/meta/DOCS_STYLE.md) before edits.  
-Read [docs/meta/SPINE.md](docs/meta/SPINE.md) for order.  
+---
 
-## Contracts  
-Deterministic runs occur for identical inputs and seeds.  
-CLI JSON output schema is stable across releases.  
-Run artifacts follow a stable layout.  
+## Table of Contents
 
-## Invariants  
-Install with `pipx install agentic-proteins`.  
-Run with `agentic-proteins run --sequence "ACDEFGHIKLMNPQRSTVWY"`.  
-Inspect with `agentic-proteins inspect-candidate <candidate_id>`.  
+* [Why Agentic Proteins?](#why-agentic-proteins)
+* [Try It in 20 Seconds](#try-it-in-20-seconds)
+* [Key Features](#key-features)
+* [Installation](#installation)
+* [Quick Start](#quick-start)
+* [Artifacts & Reproducibility](#artifacts--reproducibility)
+* [API Surface](#api-surface)
+* [Built-in Commands](#built-in-commands)
+* [Tests & Quality](#tests--quality)
+* [Project Tree](#project-tree)
+* [Docs & Resources](#docs--resources)
+* [Contributing](#contributing)
+* [License](#license)
 
-## Failure Modes  
-Docs: [docs/index.md](docs/index.md).  
-Docs spine: [docs/meta/SPINE.md](docs/meta/SPINE.md).  
-Getting started: [docs/overview/getting_started.md](docs/overview/getting_started.md).  
 
-## Extension Points  
-API doc: [docs/api/overview.md](docs/api/overview.md).  
-Core concepts: [docs/concepts/core_concepts.md](docs/concepts/core_concepts.md).  
-Docs style: [docs/meta/DOCS_STYLE.md](docs/meta/DOCS_STYLE.md).  
 
-## Exit Criteria  
-This README becomes obsolete when a generated entrypoint replaces it.  
-The replacement is `docs/index.md`.  
-Obsolete copies are removed.  
+---
+
+<a id="why-agentic-proteins"></a>
+## Why Agentic Proteins?
+
+Most protein design tooling prioritizes iteration speed. Agentic Proteins prioritizes **repeatability, traceability, and audit-ready artifacts**:
+
+* **Determinism first** for reliable experiments and CI validation.
+* **Artifact immutability** with hash-checked outputs.
+* **Invariant enforcement** for predictable execution paths.
+* **Clear boundaries** between deterministic execution and stochastic components.
+
+
+
+---
+
+<a id="try-it-in-20-seconds"></a>
+## Try It in 20 Seconds
+
+```bash
+pipx install agentic-proteins  # Or: pip install agentic-proteins
+agentic-proteins --version
+agentic-proteins run --sequence "ACDEFGHIKLMNPQRSTVWY"
+agentic-proteins inspect-candidate <candidate_id>
+```
+
+
+
+---
+
+<a id="key-features"></a>
+## Key Features
+
+* **Deterministic execution** — reproducible runs with seeded randomness.
+* **Artifact-first workflow** — immutable artifacts with stable hashes.
+* **Invariant enforcement** — fail-fast checks across runtime boundaries.
+* **Dual surface** — CLI and API share the same contracts.
+* **Structured telemetry** — correlation IDs and traceable logs.
+
+
+
+---
+
+<a id="installation"></a>
+## Installation
+
+Requires **Python 3.11+**.
+
+```bash
+# Isolated install (recommended)
+pipx install agentic-proteins
+
+# Standard
+pip install agentic-proteins
+```
+
+Upgrade: `pipx upgrade agentic-proteins` or `pip install --upgrade agentic-proteins`.
+
+
+
+---
+
+<a id="quick-start"></a>
+## Quick Start
+
+```bash
+# Discover commands/flags
+agentic-proteins --help
+
+# Run a deterministic design cycle
+agentic-proteins run --sequence "ACDEFGHIKLMNPQRSTVWY" --seed 7
+
+# Inspect artifacts
+agentic-proteins inspect-candidate <candidate_id>
+```
+
+
+
+---
+
+<a id="artifacts--reproducibility"></a>
+## Artifacts & Reproducibility
+
+Artifacts are immutable and hash-addressed. Reproducing a run verifies hashes before returning outputs.
+
+```bash
+agentic-proteins reproduce <run_id>
+```
+
+Docs: [Execution Lifecycle](https://bijux.github.io/agentic-proteins/architecture/execution_lifecycle/) · [Invariants](https://bijux.github.io/agentic-proteins/architecture/invariants/)
+
+
+
+---
+
+<a id="api-surface"></a>
+## API Surface
+
+The HTTP API exposes the same contracts as the CLI.
+
+Docs: [API Overview](https://bijux.github.io/agentic-proteins/api/overview/) · [Schema](https://bijux.github.io/agentic-proteins/api/schema/)
+
+
+
+---
+
+<a id="built-in-commands"></a>
+## Built-in Commands
+
+| Command | Description | Example |
+| ------- | ----------- | ------- |
+| `run` | Execute a design run | `agentic-proteins run --sequence ...` |
+| `inspect-candidate` | Inspect a candidate artifact | `agentic-proteins inspect-candidate <id>` |
+| `reproduce` | Replay a run with hash checks | `agentic-proteins reproduce <run_id>` |
+| `api` | Start the API server | `agentic-proteins api --host 0.0.0.0` |
+
+Full surface: [CLI Surface](https://bijux.github.io/agentic-proteins/interface/cli_surface/)
+
+
+
+---
+
+<a id="tests--quality"></a>
+## Tests & Quality
+
+* **Coverage floors:** enforced per module in CI.
+* **Benchmarks:** regression gate on critical path.
+* **Docs:** linted and built in CI.
+
+Quick commands:
+
+```bash
+make test
+make lint
+make quality
+```
+
+Artifacts:
+[Test Artifacts](https://bijux.github.io/agentic-proteins/artifacts/test/) ·
+[HTML coverage report](https://bijux.github.io/agentic-proteins/artifacts/test/htmlcov/index.html)
+
+
+
+---
+
+<a id="project-tree"></a>
+## Project Tree
+
+```
+api/            # OpenAPI schemas
+config/         # Lint/type/security configs
+docs/           # MkDocs site
+makefiles/      # Task modules (docs, test, lint, etc.)
+scripts/        # Helper scripts
+src/agentic_proteins/  # Runtime + CLI implementation
+tests/          # unit / integration / e2e
+```
+
+
+
+---
+
+<a id="docs--resources"></a>
+## Docs & Resources
+
+* **Site**: https://bijux.github.io/agentic-proteins/
+* **Changelog**: https://github.com/bijux/agentic-proteins/blob/main/CHANGELOG.md
+* **Repository**: https://github.com/bijux/agentic-proteins
+* **Issues**: https://github.com/bijux/agentic-proteins/issues
+* **Security** (private reports): https://github.com/bijux/agentic-proteins/security/advisories/new
+* **Artifacts**: https://bijux.github.io/agentic-proteins/artifacts/
+
+
+
+---
+
+<a id="contributing"></a>
+## Contributing
+
+Welcome. See **[CONTRIBUTING.md](https://github.com/bijux/agentic-proteins/blob/main/CONTRIBUTING.md)** for setup and test guidance.
+
+
+
+---
+
+<a id="license"></a>
+## License
+
+Apache-2.0 — see **[LICENSE](https://github.com/bijux/agentic-proteins/blob/main/LICENSE)**.
+© 2025 Bijan Mousavi.
+
+

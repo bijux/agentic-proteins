@@ -20,7 +20,7 @@ We pledge to make our community welcoming, safe, and equitable for all.
 - [Scope](#scope)  
 - [Attribution](#attribution)  
 
-[Back to top](#top)  
+  
 
 ---  
 
@@ -32,7 +32,7 @@ We pledge to make our community welcoming, safe, and equitable for all.
 
 We are committed to fostering an environment that respects and promotes the dignity, rights, and contributions of all individuals, regardless of characteristics including race, ethnicity, caste, color, age, physical characteristics, neurodiversity, disability, sex or gender, gender identity or expression, sexual orientation, language, philosophy or religion, national or social origin, socio-economic position, level of education, or other status. The same privileges of participation are extended to everyone who participates in good faith and in accordance with this Covenant.  
 
-[Back to top](#top)  
+  
 
 ---  
 
@@ -52,7 +52,7 @@ With these considerations in mind, we agree to behave mindfully toward each othe
 6. Committing to **repairing harm** when it occurs.  
 7. Behaving in other ways that promote and sustain the **well-being of our community**.  
 
-[Back to top](#top)  
+  
 
 ---  
 
@@ -70,7 +70,7 @@ We agree to restrict the following behaviors in our community. Instances, threat
 6. **Endangerment.** Causing, encouraging, or threatening violence or other harm toward any person or group.  
 7. Behaving in other ways that **threaten the well-being** of our community.  
 
-[Back to top](#top)  
+  
 
 ---  
 
@@ -83,7 +83,7 @@ We agree to restrict the following behaviors in our community. Instances, threat
 3. **Promotional materials**. Sharing marketing or other commercial content in a way that is outside the norms of the community.  
 4. **Irresponsible communication.** Failing to responsibly present content which includes, links or describes any other restricted behaviors.  
 
-[Back to top](#top)  
+  
 
 ---  
 
@@ -106,7 +106,7 @@ We will acknowledge receipt as soon as possible and handle reports promptly and 
 
 **Anti-retaliation:** Retaliation against anyone who reports a concern or participates in an investigation is a violation of this Code.  
 
-[Back to top](#top)  
+  
 
 ---  
 
@@ -138,7 +138,7 @@ If an investigation by the project maintainers finds that this Code of Conduct h
 
 This enforcement ladder is intended as a guideline. It does not limit the ability of maintainers to use their discretion and judgment, in keeping with the best interests of our community.  
 
-[Back to top](#top)  
+  
 
 ---  
 
@@ -148,7 +148,7 @@ This enforcement ladder is intended as a guideline. It does not limit the abilit
 
 This Code of Conduct applies within all project spaces, and also applies when an individual is officially representing the project in public or other spaces. Examples of representing our project include using an official email address, posting via an official social media account, or acting as an appointed representative at an online or offline event.  
 
-[Back to top](#top)  
+  
 
 ---  
 
@@ -162,4 +162,4 @@ Contributor Covenant is stewarded by the Organization for Ethical Source and lic
 
 For answers to common questions about Contributor Covenant, see the FAQ at <https://www.contributor-covenant.org/faq>. Translations are provided at <https://www.contributor-covenant.org/translations>. Additional enforcement and community guideline resources can be found at <https://www.contributor-covenant.org/resources>.  
 
-[Back to top](#top)  
+  

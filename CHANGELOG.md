@@ -19,12 +19,25 @@ This project adheres to [Semantic Versioning](https://semver.org) and the
 * (add here)
 <!-- unreleased end -->  
 
-[Back to top](#top)  
+  
 
 ---  
 
 <!-- release start -->  
 <a id="v0-2-0"></a>  
+
+## [0.2.1]  
+
+### Added  
+- Expanded unit and integration coverage with new invariants, API, and docs gates.  
+- Additional tests for provider isolation, reproducibility, and abuse-case blocking.  
+- Fancy PyPI readme fragments for README + changelog publishing.  
+
+### Changed  
+- Refactored `tests/unit` into a structured layout for clearer ownership.  
+
+### Fixed  
+- Coverage floors and CI gates stabilized around new test layout.  
 
 ## [0.2.0]  
 

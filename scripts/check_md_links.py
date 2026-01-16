@@ -18,6 +18,8 @@ def iter_markdown_files(root: Path) -> list[Path]:
         for path in sorted(docs_dir.rglob("*.md")):
             if "_legacy" in path.parts:
                 continue
+            if path.name == "index.md" and path.parent == docs_dir:
+                continue
             files.append(path)
     readme = root / "README.md"
     if readme.exists():

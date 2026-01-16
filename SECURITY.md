@@ -5,7 +5,7 @@
 
 We follow **Coordinated Vulnerability Disclosure (CVD)**. Please report issues privately and allow time for remediation before public disclosure.  
 
-[Back to top](#top)  
+  
 
 ---  
 
@@ -19,7 +19,7 @@ We follow **Coordinated Vulnerability Disclosure (CVD)**. Please report issues p
 - [Proactive Security Practices](#proactive-security-practices)  
 - [Contact](#contact)  
 
-[Back to top](#top)  
+  
 
 ---  
 
@@ -36,7 +36,7 @@ We patch the **latest minor line** only.
 
 When `0.2.0` is released, support for `0.1.x` ends. We do **not** backport beyond the most recent minor line.  
 
-[Back to top](#top)  
+  
 
 ---  
 
@@ -61,7 +61,7 @@ Please report privately via one of the following channels:
 
 > Please **do not** include secrets or production data. If you encounter sensitive information, stop testing and report immediately.  
 
-[Back to top](#top)  
+  
 
 ---  
 
@@ -81,7 +81,7 @@ Best-effort targets based on **CVSS v3.x** severity:
 
 We publish a **GitHub Security Advisory** once a fix is available and request a **CVE** when appropriate. Reporter credit is given with your consent.  
 
-[Back to top](#top)  
+  
 
 ---  
 
@@ -99,7 +99,7 @@ We won’t pursue or support legal action for good-faith testing that:
 
 If you’re unsure whether an activity is in scope, **ask first** via the channels above.  
 
-[Back to top](#top)  
+  
 
 ---  
 
@@ -123,7 +123,7 @@ If you’re unsure whether an activity is in scope, **ask first** via the channe
 
 > For dependency vulnerabilities, please also notify the **upstream** project. We will track, pin/upgrade, or mitigate downstream as needed.  
 
-[Back to top](#top)  
+  
 
 ---  
 
@@ -138,7 +138,7 @@ If you’re unsure whether an activity is in scope, **ask first** via the channe
 
 *(No public bounty program at this time.)*  
 
-[Back to top](#top)  
+  
 
 ---  
 

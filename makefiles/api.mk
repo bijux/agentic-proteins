@@ -38,7 +38,7 @@ ALL_API_SCHEMAS_ABS   := $(abspath $(ALL_API_SCHEMAS))
 # Python CLIs (prefer ACT if present)
 PRANCE                  := $(if $(ACT),$(ACT)/prance,prance)
 OPENAPI_SPEC_VALIDATOR  := $(if $(ACT),$(ACT)/openapi-spec-validator,openapi-spec-validator)
-SCHEMATHESIS            := $(if $(ACT),$(ACT)/schemathesis,schemathesis)
+SCHEMATHESIS            := $(if $(ACT),$(abspath $(ACT))/schemathesis,schemathesis)
 SCHEMATHESIS_OPTS ?= \
   --checks=all --max-failures=1 \
   --report junit --report-junit-path $(SCHEMATHESIS_JUNIT_ABS) \

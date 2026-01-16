@@ -1,5 +1,9 @@
 [build-system]
-requires = ["hatchling>=1.25.0", "hatch-vcs>=0.4.0"]
+requires = [
+  "hatchling>=1.27.0,<1.28",
+  "hatch-fancy-pypi-readme>=24.2,<26.0",
+  "hatch-vcs>=0.4.0,<1.0"
+]
 build-backend = "hatchling.build"
 
 [project]
@@ -25,7 +29,9 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Programming Language :: Python :: Implementation :: CPython",
+  "Topic :: Scientific/Engineering :: Computational-Biology",
   "Topic :: Scientific/Engineering :: Bio-Informatics",
   "Topic :: Scientific/Engineering :: Chemistry",
   "Topic :: Software Development :: Libraries",
@@ -115,14 +121,32 @@ dev = [
 ]
 
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/agentic_proteins"]
+[tool.hatch.build]
+include = [
+  "README.md",
+  "CHANGELOG.md",
+  "LICENSE",
+  "REUSE.toml",
+  "CITATION.cff",
+  "src/agentic_proteins/py.typed",
+]
 
 [tool.hatch.version]
 source = "vcs"
-fallback-version = "0.0.0"
-version-scheme = "post-release"
-local-scheme = "node-and-date"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agentic_proteins"]
+zip-safe = false
+
+[tool.hatch.build.targets.wheel.package-data]
+"agentic_proteins" = ["py.typed"]
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+fragments = [
+  { path = "README.md" },
+  { path = "CHANGELOG.md" },
+]
 
 # --8<-- [start:deptry]
 [tool.deptry]

@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 def test_conceptual_onboarding_passes() -> None:
-    root = Path(__file__).resolve().parents[2]
+    root = Path(__file__).resolve().parents[3]
     text = (root / "docs" / "concepts" / "core_concepts.md").read_text()
     required = (
         "agent:",
