@@ -170,9 +170,7 @@ make lint
 make quality
 ```
 
-Artifacts:
-[Test Artifacts](https://bijux.github.io/agentic-proteins/artifacts/test/) ·
-[HTML coverage report](https://bijux.github.io/agentic-proteins/artifacts/test/htmlcov/index.html)
+Artifacts: Generated in CI; see GitHub Actions for logs and reports.
 
 
 
@@ -223,5 +221,4 @@ Welcome. See **[CONTRIBUTING.md](https://github.com/bijux/agentic-proteins/blob/
 
 Apache-2.0 — see **[LICENSE](https://github.com/bijux/agentic-proteins/blob/main/LICENSE)**.
 © 2025 Bijan Mousavi.
-
 
