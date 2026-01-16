@@ -8,7 +8,6 @@ from pathlib import Path
 
 
 LAYER_ORDER = {
-    "contracts": 8,
     "cli": 7,
     "interfaces": 7,
     "api": 7,
@@ -80,10 +79,11 @@ def test_root_modules_removed() -> None:
 def test_high_level_tests_use_public_entrypoints() -> None:
     root = Path(__file__).resolve().parents[2] / "tests"
     allowed_prefixes = (
-        "agentic_proteins.contracts",
         "agentic_proteins.interfaces",
         "agentic_proteins.report",
         "agentic_proteins.runtime",
+        "agentic_proteins.tools",
+        "agentic_proteins.core",
     )
     for path in (root / "e2e").rglob("test_*.py"):
         tree = ast.parse(path.read_text(), filename=str(path))

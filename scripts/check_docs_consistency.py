@@ -20,6 +20,12 @@ MKDOCS_RE = re.compile(r"([A-Za-z0-9_./-]+\.md)")
 FUTURE_WORDS = re.compile(
     r"\b(will|planned|future|soon|upcoming|later|tbd|eventually)\b", re.IGNORECASE
 )
+VOICE_FORBIDDEN = re.compile(
+    r"\b(maybe|might|could|should|probably|likely|perhaps|amazing|easy|simple|powerful|best)\b",
+    re.IGNORECASE,
+)
+VOICE_PERSON = re.compile(r"\b(i|we|you|our|your|my|me)\b", re.IGNORECASE)
+MAX_WORDS_PER_SENTENCE = 20
 FRONT_MATTER_FIELDS = ("**Scope:**", "**Audience:**", "**Guarantees:**", "**Non-Goals:**")
 ALLOWED_SECTION_ORDER = [
     "Overview",
@@ -30,8 +36,14 @@ ALLOWED_SECTION_ORDER = [
     "Exit Criteria",
 ]
 ALLOWED_SECTIONS = set(ALLOWED_SECTION_ORDER)
-CODE_REF_RE = re.compile(r"(src/agentic_proteins|tests)/[A-Za-z0-9_./-]+\.py")
+CODE_REF_RE = re.compile(
+    r"((src/agentic_proteins|tests|scripts)/[A-Za-z0-9_./-]+\.py|api/[A-Za-z0-9_./-]+\.yaml)"
+)
 SECURITY_WORDS = re.compile(r"\b(security|sandbox|isolation|trust)\b", re.IGNORECASE)
+DOC_LINK_RE = re.compile(r"\[([^\]]+)\]\(([^)]+)\)")
+DOC_NAME_RE = re.compile(r"\b[A-Za-z0-9_./-]+\.md\b")
+SYMBOL_RE = re.compile(r"(agentic_proteins\.[A-Za-z0-9_\.]+)")
+
 
 
 def _module_index() -> set[str]:
@@ -67,6 +79,24 @@ def main() -> int:
 
     modules = _module_index()
     failures: list[str] = []
+    naming_path = DOCS_DIR / "NAMING.md"
+    canonical: list[str] = []
+    aliases: list[str] = []
+    if naming_path.exists():
+        current = None
+        for line in naming_path.read_text().splitlines():
+            if line.strip() == "Canonical names:":
+                current = "canonical"
+                continue
+            if line.strip() == "Forbidden aliases:":
+                current = "aliases"
+                continue
+            if line.strip().startswith("- "):
+                item = line.strip()[2:].strip()
+                if current == "canonical":
+                    canonical.append(item)
+                elif current == "aliases":
+                    aliases.append(item)
 
     if mkdocs_path.exists():
         for ref in sorted(nav_refs):
@@ -85,12 +115,10 @@ def main() -> int:
                 failures.append(
                     f"index_only_dir: {path.relative_to(DOCS_DIR)}"
                 )
-
     allow_non_lowercase = set()
+    seen_titles: dict[str, Path] = {}
     for doc in sorted(DOCS_DIR.rglob("*.md")):
         rel = doc.relative_to(DOCS_DIR)
-        if rel.name != rel.name.lower() and rel.name not in allow_non_lowercase:
-            failures.append(f"non_lowercase_doc: {rel}")
         if rel not in nav_refs:
             failures.append(f"orphan_doc: {rel}")
         text = doc.read_text()
@@ -100,6 +128,10 @@ def main() -> int:
         normalized = re.sub(r"\bPLANNED\b", "PLAN_STATE", text)
         if FUTURE_WORDS.search(normalized):
             failures.append(f"future_language: {rel_from_root}")
+        if VOICE_FORBIDDEN.search(text):
+            failures.append(f"voice_forbidden: {rel_from_root}")
+        if VOICE_PERSON.search(text):
+            failures.append(f"voice_person: {rel_from_root}")
 
         lines = text.splitlines()
         if not lines or not lines[0].startswith("# "):
@@ -108,6 +140,12 @@ def main() -> int:
             title = lines[0][2:].strip()
             if title != rel.stem:
                 failures.append(f"title_mismatch: {rel_from_root}")
+            if title in seen_titles:
+                failures.append(
+                    f"duplicate_title: {title} in {rel_from_root} and {seen_titles[title]}"
+                )
+            else:
+                seen_titles[title] = rel_from_root
         for idx, field in enumerate(FRONT_MATTER_FIELDS, start=2):
             if len(lines) <= idx or not lines[idx].strip().startswith(field):
                 failures.append(f"missing_front_matter: {rel_from_root}")
@@ -134,13 +172,70 @@ def main() -> int:
 
         if not CODE_REF_RE.search(text):
             failures.append(f"missing_code_ref: {rel_from_root}")
-        if rel.parts[0] != "security":
+        if rel.parts[0] != "security" and rel.name != "sandbox.md":
             for line in lines:
-                if "docs/security/" in line:
+                if "security/" in line or "sandbox.md" in line:
                     continue
                 if SECURITY_WORDS.search(line):
-                    failures.append(f"security_word_outside_security_docs: {rel_from_root}")
+                    failures.append(
+                        f"security_word_outside_security_docs: {rel_from_root}"
+                    )
                     break
+
+        link_targets = [target for _label, target in DOC_LINK_RE.findall(text)]
+        doc_links = [t for t in link_targets if t.endswith(".md")]
+        code_links = [t for t in link_targets if t.endswith((".py", ".yaml"))]
+        if len(doc_links) < 2:
+            failures.append(f"doc_link_density: {rel_from_root}")
+        if len(code_links) < 1:
+            failures.append(f"code_link_density: {rel_from_root}")
+
+        # Hyperlink-only references for doc names.
+        link_spans = [m.span() for m in DOC_LINK_RE.finditer(text)]
+        for match in DOC_NAME_RE.finditer(text):
+            if not any(start <= match.start() <= end for start, end in link_spans):
+                failures.append(f"unlinked_doc_ref: {rel_from_root}")
+                break
+        for match in SYMBOL_RE.finditer(text):
+            if not any(start <= match.start() <= end for start, end in link_spans):
+                failures.append(f"unlinked_symbol_ref: {rel_from_root}")
+                break
+        for match in SRC_PATH_RE.finditer(text):
+            if not any(start <= match.start() <= end for start, end in link_spans):
+                failures.append(f"unlinked_path_ref: {rel_from_root}")
+                break
+
+        # Heading-only section guard.
+        section_blocks: dict[str, list[str]] = {}
+        current = None
+        for line in lines:
+            if line.startswith("## "):
+                current = line[3:].strip()
+                section_blocks[current] = []
+                continue
+            if current:
+                section_blocks[current].append(line)
+        for section, block in section_blocks.items():
+            block_text = " ".join(block).strip()
+            sentence_count = len(re.findall(r"[.!?]", block_text))
+            has_table = any("|" in line for line in block)
+            if sentence_count < 3 and not has_table:
+                failures.append(f"heading_only: {section} in {rel_from_root}")
+
+        # Sentence length rule (ignore list items).
+        text_for_sentences = "\n".join(
+            line for line in text.splitlines() if not line.lstrip().startswith("- ")
+        )
+        for sentence in re.split(r"[.!?]", text_for_sentences):
+            words = [w for w in sentence.split() if w]
+            if words and len(words) > MAX_WORDS_PER_SENTENCE:
+                failures.append(f"sentence_too_long: {rel_from_root}")
+
+        word_count = len(re.findall(r"\\b\\w+\\b", text))
+        if rel.name == "index.md" and word_count > 100:
+            failures.append(f"index_too_long: {rel_from_root}")
+        elif rel.name != "index.md" and word_count > 200:
+            failures.append(f"reference_too_long: {rel_from_root}")
 
         module_refs = MODULE_RE.findall(text)
 
@@ -156,14 +251,57 @@ def main() -> int:
             if not _path_exists(path_ref):
                 failures.append(f"missing_path_ref: {path_ref} in {rel_from_root}")
 
+        for alias in aliases:
+            if re.search(rf"\\b{re.escape(alias)}\\b", text, re.IGNORECASE):
+                failures.append(f"alias_used: {rel_from_root}")
+                break
+
+        text_without_links = re.sub(r"\[[^\]]+\]\([^)]+\)", "", text)
+        for name in canonical:
+            if name.lower() != name and name.lower() in text_without_links:
+                if re.search(rf"\\b{re.escape(name.lower())}\\b", text_without_links):
+                    failures.append(f"canonical_casing: {rel_from_root}")
+                    break
+
     test_text = "\n".join(
         p.read_text() for p in (ROOT / "tests").rglob("*.py")
     )
     for doc in sorted(DOCS_DIR.rglob("*.md")):
         text = doc.read_text()
-        for match in CODE_REF_RE.findall(text):
-            if match.startswith("src/agentic_proteins") and match not in test_text:
-                failures.append(f"doc_without_tests: {doc.relative_to(ROOT)}")
+        for match in CODE_REF_RE.finditer(text):
+            ref = match.group(1)
+            if ref.startswith("src/agentic_proteins"):
+                module_path = Path(ref)
+                module_name = "agentic_proteins." + ".".join(
+                    module_path.relative_to("src/agentic_proteins").with_suffix("").parts
+                )
+                if module_name not in test_text:
+                    failures.append(f"doc_without_tests: {doc.relative_to(ROOT)}")
+
+    readme_path = ROOT / "README.md"
+    index_path = DOCS_DIR / "index.md"
+    if readme_path.exists() and index_path.exists():
+        def _headings_and_links(path: Path) -> tuple[list[str], list[str]]:
+            text = path.read_text()
+            headings = [line[3:].strip() for line in text.splitlines() if line.startswith("## ")]
+            links = []
+            for _label, target in DOC_LINK_RE.findall(text):
+                if target.startswith("#") or "://" in target:
+                    continue
+                resolved = (path.parent / target).resolve()
+                try:
+                    resolved = resolved.relative_to(ROOT)
+                except ValueError:
+                    pass
+                links.append(str(resolved))
+            return headings, links
+
+        readme_headings, readme_links = _headings_and_links(readme_path)
+        index_headings, index_links = _headings_and_links(index_path)
+        if readme_headings != index_headings:
+            failures.append("readme_index_headings_mismatch")
+        if not set(readme_links).issubset(set(index_links)):
+            failures.append("readme_index_links_mismatch")
 
     if failures:
         for failure in failures:

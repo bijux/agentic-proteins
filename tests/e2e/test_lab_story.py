@@ -6,7 +6,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from agentic_proteins.runtime import RunManager
-from agentic_proteins.contracts import RunConfig
+from agentic_proteins.runtime.infra import RunConfig
 
 
 def _read_fasta(path: Path) -> str:

@@ -11,12 +11,15 @@ from agentic_proteins.core.failures import FailureType, suggest_next_action
 from agentic_proteins.core.fingerprints import hash_payload, stable_json
 from agentic_proteins.core.hashing import sha256_hex
 from agentic_proteins.core.identifiers import deterministic_id
+from agentic_proteins.core.stability import sealed
 from agentic_proteins.core.status import (
     ExecutionStatus,
     Outcome,
     ToolStatus,
     WorkflowState,
 )
+
+sealed()
 
 __all__ = [
     "CostSummary",

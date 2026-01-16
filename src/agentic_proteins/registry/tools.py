@@ -6,13 +6,26 @@
 from __future__ import annotations
 
 from agentic_proteins.core.tooling import ToolContract
-from agentic_proteins.registry.base import RegistryBase
 
 
-class ToolRegistry(RegistryBase):
+class ToolRegistry:
     """ToolRegistry."""
 
     _registry: dict[tuple[str, str], ToolContract] = {}
+    _locked: bool = False
+
+    @classmethod
+    def list(cls) -> tuple[ToolContract, ...]:
+        return tuple(cls._registry.values())
+
+    @classmethod
+    def lock(cls) -> None:
+        cls._locked = True
+
+    @classmethod
+    def clear(cls) -> None:
+        cls._registry.clear()
+        cls._locked = False
 
     @classmethod
     def register(cls, contract: ToolContract) -> None:

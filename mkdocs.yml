@@ -1,4 +1,4 @@
-site_name: agentic proteins
+site_name: AGENTIC PROTEINS
 site_url: https://bijux.github.io/agentic-proteins/
 repo_name: bijux/agentic-proteins
 repo_url: https://github.com/bijux/agentic-proteins
@@ -33,13 +33,52 @@ theme:
 
 nav:
   - Home: index.md
+  - Getting Started: overview/getting_started.md
+  - Concepts: concepts/core_concepts.md
+  - Governance:
+      - core: governance/core.md
+      - semver: governance/semver.md
+      - anti_patterns: governance/anti_patterns.md
+      - roadmap_ceiling: governance/roadmap_ceiling.md
+      - positioning: governance/positioning.md
+      - release_identity: governance/release_identity.md
+  - Research:
+      - agentic_criteria: research/agentic_criteria.md
+      - agent_taxonomy: research/agent_taxonomy.md
+      - formal_model: research/formal_model.md
+      - falsifiable_claim: research/falsifiable_claim.md
+      - decisive_experiment: research/decisive_experiment.md
+      - ablation_studies: research/ablation_studies.md
+      - neutral_results: research/neutral_results.md
+      - reviewer_premortem: research/reviewer_premortem.md
+      - system_schematic: research/system_schematic.md
+  - Externalization:
+      - mpi: externalization/mpi.md
+      - golden_path: externalization/golden_path.md
+      - misuse_guards: externalization/misuse_guards.md
+      - surface_area: externalization/surface_area.md
+      - sandbox: externalization/sandbox.md
+      - invariant_visualization: externalization/invariant_visualization.md
+      - why_not_x: externalization/why_not_x.md
   - Docs:
-      - spine: spine.md
-      - style: style.md
-      - triage: triage.md
+      - SPINE: meta/SPINE.md
+      - DOCS_STYLE: meta/DOCS_STYLE.md
+      - DOCS_VOICE: meta/DOCS_VOICE.md
+      - NAMING: meta/NAMING.md
+      - TRIAGE: meta/TRIAGE.md
   - Architecture:
+      - architecture: architecture/architecture.md
       - invariants: architecture/invariants.md
+      - abstraction_removal: architecture/abstraction_removal.md
       - experimental: architecture/experimental.md
+      - llm_authority: architecture/llm_authority.md
+      - execution_model: architecture/execution_model.md
+      - execution_lifecycle: architecture/execution_lifecycle.md
+      - execution_cost: architecture/execution_cost.md
+      - pathway_limits: architecture/pathway_limits.md
+      - conservation: architecture/conservation.md
+      - metrics: architecture/metrics.md
+      - negative_results: architecture/negative_results.md
       - design_debt: architecture/design_debt.md
   - CLI:
       - cli: cli/cli.md
@@ -50,6 +89,7 @@ nav:
   - Security:
       - dependencies: security/dependencies.md
       - threat_model: security/threat_model.md
+      - citation: security/citation.md
 
 strict: true
 

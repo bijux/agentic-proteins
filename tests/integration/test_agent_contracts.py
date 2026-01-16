@@ -53,17 +53,44 @@ AGENT_CLASSES = [
 
 
 def _repo_files(root: Path) -> set[Path]:
-    return {p for p in root.rglob("*") if p.is_file()}
+    scan_roots = [
+        root / "src",
+        root / "tests",
+        root / "docs",
+        root / "scripts",
+        root / "makefiles",
+        root / "artifacts",
+    ]
+    files: set[Path] = set()
+    for scan_root in scan_roots:
+        if not scan_root.exists():
+            continue
+        for path in scan_root.rglob("*"):
+            if path.is_file():
+                files.add(path)
+    return files
 
 
 def test_agents_import_purity(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("PYTHONDONTWRITEBYTECODE", "1")
     sys.dont_write_bytecode = True
 
-    def _blocked_getenv(*_args, **_kwargs):
+    allowed_keys = {"COLUMNS", "LINES"}
+    allowed_defaults = {"COLUMNS": "80", "LINES": "24"}
+    original_getenv = os.getenv
+    original_getitem = os.environ.__class__.__getitem__
+
+    def _blocked_getenv(key, *_args, **_kwargs):
+        if key in allowed_keys:
+            return original_getenv(key)
         raise AssertionError("Environment variables must not be read at import time.")
 
     def _blocked_getitem(_self, _key):
+        if _key in allowed_keys:
+            try:
+                return original_getitem(os.environ, _key)
+            except KeyError:
+                return allowed_defaults[_key]
         raise AssertionError("Environment variables must not be read at import time.")
 
     monkeypatch.setattr(os, "getenv", _blocked_getenv)

@@ -5,4 +5,8 @@
 
 from __future__ import annotations
 
+from agentic_proteins.core.stability import stable
+
+stable()
+
 __all__: list[str] = []

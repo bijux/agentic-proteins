@@ -1,27 +1,40 @@
-# overview
+# overview  
 
-**Scope:** HTTP API summary.
-**Audience:** API users.
-**Guarantees:** API mirrors CLI capabilities.
-**Non-Goals:** Authentication.
+**Scope:** HTTP API summary.  
+**Audience:** API users.  
+**Guarantees:** API mirrors CLI capabilities.  
+**Non-Goals:** Authentication.  
+Why: This doc exists to record its single responsibility for review.  
 
-## Overview
-Why: Define the API surface at a glance.
+## Overview  
+This doc defines one responsibility.  
+Architecture components are defined in [../architecture/architecture.md](../architecture/architecture.md).  
+Read [../cli/cli.md](../cli/cli.md) before edits.  
+Read [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md) for context.  
 
-## Contracts
-- Endpoints map to CLI commands.
+## Contracts  
+Each statement is a contract.  
+Contracts align with [tests/api/test_run.py](https://github.com/bijux/agentic-proteins/blob/main/tests/api/test_run.py).  
+Contracts link to [../cli/cli.md](../cli/cli.md) and [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
 
-## Invariants
-- API returns structured envelopes.
+## Invariants  
+Invariants describe stable behavior.  
+Checks align with [tests/api/test_run.py](https://github.com/bijux/agentic-proteins/blob/main/tests/api/test_run.py).  
+Invariants align with [../cli/cli.md](../cli/cli.md).  
 
-## Failure Modes
-- Invalid inputs return error envelopes.
+## Failure Modes  
+Failures are explicit and tested.  
+Failure coverage aligns with [tests/api/test_run.py](https://github.com/bijux/agentic-proteins/blob/main/tests/api/test_run.py).  
+Failures align with [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
 
-## Extension Points
-- Add endpoints with schema updates.
+## Extension Points  
+Extensions require tests and docs.  
+Extensions are tracked in [../cli/cli.md](../cli/cli.md).  
+Extensions align with [tests/api/test_run.py](https://github.com/bijux/agentic-proteins/blob/main/tests/api/test_run.py).  
 
-## Exit Criteria
-- Obsolete when API is removed.
-- Replacement: none.
+## Exit Criteria  
+This doc becomes obsolete when the surface ends.  
+The replacement is linked in [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+Obsolete docs are removed.  
 
-Code refs: src/agentic_proteins/api/app.py, src/agentic_proteins/api/v1/router.py.
+Code refs: [tests/api/test_run.py](https://github.com/bijux/agentic-proteins/blob/main/tests/api/test_run.py).  

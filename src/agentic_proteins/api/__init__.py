@@ -6,5 +6,8 @@
 from __future__ import annotations
 
 from agentic_proteins.api.app import AppConfig, create_app
+from agentic_proteins.core.stability import stable
+
+stable()
 
 __all__ = ["AppConfig", "create_app"]

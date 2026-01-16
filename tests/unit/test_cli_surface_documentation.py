@@ -49,7 +49,9 @@ def _repo_root() -> Path:
 def test_cli_surface_documented() -> None:
     doc_path = _repo_root() / "docs/interface/cli_surface.md"
     text = doc_path.read_text()
-    documented_commands = set(re.findall(r"^- ([a-z0-9-]+(?: [a-z0-9-]+)?)$", text, re.M))
+    documented_commands = set(
+        re.findall(r"^- ([a-z0-9-]+(?: [a-z0-9-]+)?)\s*$", text, re.M)
+    )
     documented_flags = set(re.findall(r"--[a-z0-9-]+", text))
 
     commands = _collect_commands()

@@ -14,6 +14,7 @@ def test_root_md_whitelist() -> None:
         "CODE_OF_CONDUCT.md",
         "CONTRIBUTING.md",
         "CHANGELOG.md",
+        "CORE.md",
     }
     for path in root.glob("*.md"):
         assert path.name in allowed

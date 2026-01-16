@@ -16,7 +16,9 @@ ALLOWED_SECTION_ORDER = [
     "Exit Criteria",
 ]
 FRONT_MATTER_FIELDS = ("**Scope:**", "**Audience:**", "**Guarantees:**", "**Non-Goals:**")
-CODE_REF_RE = re.compile(r"(src/agentic_proteins|tests)/[A-Za-z0-9_./-]+\.py")
+CODE_REF_RE = re.compile(
+    r"((src/agentic_proteins|tests|scripts)/[A-Za-z0-9_./-]+\.py|api/[A-Za-z0-9_./-]+\.yaml)"
+)
 
 
 def _repo_root() -> Path:

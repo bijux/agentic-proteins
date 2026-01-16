@@ -5,6 +5,7 @@
 
 from __future__ import annotations
 
+from agentic_proteins.core.stability import experimental
 from agentic_proteins.providers.base import (
     BaseProvider,
     PredictionResult,
@@ -14,6 +15,8 @@ from agentic_proteins.providers.base import (
 )
 from agentic_proteins.providers.errors import PredictionError
 from agentic_proteins.providers.heuristic import HeuristicStructureProvider
+
+experimental()
 
 __all__ = [
     "BaseProvider",

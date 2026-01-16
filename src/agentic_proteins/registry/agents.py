@@ -7,13 +7,25 @@ from __future__ import annotations
 
 from typing import Any
 
-from agentic_proteins.registry.base import RegistryBase
 
-
-class AgentRegistry(RegistryBase):
+class AgentRegistry:
     """AgentRegistry."""
 
     _registry: dict[str, type[Any]] = {}
+    _locked: bool = False
+
+    @classmethod
+    def list(cls) -> tuple[type[Any], ...]:
+        return tuple(cls._registry.values())
+
+    @classmethod
+    def lock(cls) -> None:
+        cls._locked = True
+
+    @classmethod
+    def clear(cls) -> None:
+        cls._registry.clear()
+        cls._locked = False
 
     @classmethod
     def register(cls, agent_class: type[Any]) -> None:

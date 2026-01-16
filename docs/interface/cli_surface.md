@@ -1,52 +1,63 @@
-# cli_surface
+# cli_surface  
 
-**Scope:** CLI surface list.
-**Audience:** Contributors and reviewers.
-**Guarantees:** Documents the full CLI surface used in tests.
-**Non-Goals:** Usage examples.
+**Scope:** CLI surface list.  
+**Audience:** Contributors and reviewers.  
+**Guarantees:** Surface list matches click definitions.  
+**Non-Goals:** Usage examples.  
+Why: This doc exists to record its single responsibility for review.  
 
-## Overview
-Why: Provide a single source for CLI surface auditing.
+## Overview  
+This doc defines one responsibility.  
+Architecture components are defined in [../architecture/architecture.md](../architecture/architecture.md).  
+Read [../cli/cli.md](../cli/cli.md) before edits.  
+Read [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md) for context.  
 
-## Contracts
-Public commands:
-- api
-- run
-- resume
-- compare
-- inspect-candidate
-- export-report
-- reproduce
-- api serve
-Stable flags:
-- --sequence
-- --fasta
-- --rounds
-- --provider
-- --artifacts-dir
-- --dry-run
-- --no-logs
-- --pretty
-- --json
-- --execution-mode
-- --output
-- --host
-- --port
-- --no-docs
-Experimental flags:
-- --reload
+## Contracts  
+Each statement is a contract.  
+Contracts align with [tests/unit/test_cli_surface_documentation.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_cli_surface_documentation.py).  
+Contracts link to [../cli/cli.md](../cli/cli.md) and [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+- api  
+- api serve  
+- compare  
+- export-report  
+- inspect-candidate  
+- reproduce  
+- resume  
+- run  
+- --artifacts-dir  
+- --dry-run  
+- --execution-mode  
+- --fasta  
+- --host  
+- --json  
+- --no-docs  
+- --no-logs  
+- --output  
+- --port  
+- --pretty  
+- --provider  
+- --reload  
+- --rounds  
+- --sequence  
 
-## Invariants
-- CLI surface matches the click definitions.
+## Invariants  
+Invariants describe stable behavior.  
+Checks align with [tests/unit/test_cli_surface_documentation.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_cli_surface_documentation.py).  
+Invariants align with [../cli/cli.md](../cli/cli.md).  
 
-## Failure Modes
-- Missing documentation fails tests.
+## Failure Modes  
+Failures are explicit and tested.  
+Failure coverage aligns with [tests/unit/test_cli_surface_documentation.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_cli_surface_documentation.py).  
+Failures align with [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
 
-## Extension Points
-- Update this list when new flags land.
+## Extension Points  
+Extensions require tests and docs.  
+Extensions are tracked in [../cli/cli.md](../cli/cli.md).  
+Extensions align with [tests/unit/test_cli_surface_documentation.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_cli_surface_documentation.py).  
 
-## Exit Criteria
-- Obsolete when CLI surface is generated.
-- Replacement: CLI surface generator.
+## Exit Criteria  
+This doc becomes obsolete when the surface ends.  
+The replacement is linked in [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+Obsolete docs are removed.  
 
-Code refs: src/agentic_proteins/interfaces/cli.py, tests/unit/test_cli_surface_documentation.py.
+Code refs: [tests/unit/test_cli_surface_documentation.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_cli_surface_documentation.py).  

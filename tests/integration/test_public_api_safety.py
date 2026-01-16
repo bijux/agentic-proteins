@@ -3,8 +3,8 @@
 
 from __future__ import annotations
 
-from agentic_proteins.contracts import RunConfig
 from agentic_proteins.runtime import RunManager
+from agentic_proteins.runtime.infra import RunConfig
 
 
 def test_public_api_dry_run(tmp_path) -> None:

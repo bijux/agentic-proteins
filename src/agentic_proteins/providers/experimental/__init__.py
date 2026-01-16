@@ -5,8 +5,11 @@
 
 from __future__ import annotations
 
+from agentic_proteins.core.stability import experimental
 from agentic_proteins.providers.experimental.colabfold import APIColabFoldProvider
 from agentic_proteins.providers.experimental.openprotein import APIOpenProteinProvider
+
+experimental()
 
 EXPERIMENTAL = True
 

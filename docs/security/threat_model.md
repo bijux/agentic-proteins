@@ -1,38 +1,57 @@
-# threat_model
+# threat_model  
 
-**Scope:** Threat model skeleton.
-**Audience:** Contributors.
-**Guarantees:** Captures abuse cases, resource risks, and trust assumptions.
-**Non-Goals:** Mitigations.
+**Scope:** Threat model skeleton.  
+**Audience:** Contributors.  
+**Guarantees:** Captures abuse cases, resource risks, and assumptions.  
+**Non-Goals:** Mitigations.  
+Why: This doc exists to record its single responsibility for review.  
 
-## Overview
-Why: Track threat model placeholders in one file.
+## Overview  
+This doc defines one responsibility.  
+Architecture components are defined in [../architecture/architecture.md](../architecture/architecture.md).  
+Read [dependencies.md](dependencies.md) before edits.  
+Read [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md) for context.  
 
-## Contracts
-Abuse cases:
-- Path traversal via candidate IDs to read/write outside the candidate store.
-- Crafted sequence inputs to bypass validation and inject unsupported characters.
-- Unauthorized resume requests to force execution of stale or unapproved runs.
-Resource exhaustion risks:
-- Large batch runs exhausting local disk through artifact growth.
-- Oversized sequences driving unbounded memory usage in planning and tooling.
-- High-frequency API requests saturating CPU and log I/O.
-Trust assumptions:
-- Local filesystem permissions prevent cross-tenant artifact access.
-- Provider backends return deterministic results for the same inputs and seed.
-- CI artifacts and version metadata are not tampered with between steps.
+## Contracts  
+Each statement is a contract.  
+Contracts align with [tests/unit/test_abuse_case_path_traversal.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_abuse_case_path_traversal.py).  
+Contracts link to [dependencies.md](dependencies.md) and [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
 
-## Invariants
-- This skeleton remains unmitigated by design.
+## Invariants  
+Invariants describe stable behavior.  
+Checks align with [tests/unit/test_abuse_case_path_traversal.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_abuse_case_path_traversal.py).  
+Invariants align with [dependencies.md](dependencies.md).  
 
-## Failure Modes
-- Missing sections block security reviews.
+## Failure Modes  
+Failures are explicit and tested.  
+Failure coverage aligns with [tests/unit/test_abuse_case_path_traversal.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_abuse_case_path_traversal.py).  
+Failures align with [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
 
-## Extension Points
-- Add mitigations in SECURITY.md only.
+## Extension Points  
+Extensions require tests and docs.  
+Extensions are tracked in [dependencies.md](dependencies.md).  
+Extensions align with [tests/unit/test_abuse_case_path_traversal.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_abuse_case_path_traversal.py).  
 
-## Exit Criteria
-- Obsolete when a full threat model replaces this skeleton.
-- Replacement: full threat model doc.
+## Exit Criteria  
+This doc becomes obsolete when the surface ends.  
+The replacement is linked in [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+Obsolete docs are removed.  
 
-Code refs: tests/unit/test_abuse_case_path_traversal.py, src/agentic_proteins/domain/candidates/store.py.
+Code refs: [tests/unit/test_abuse_case_path_traversal.py](https://github.com/bijux/agentic-proteins/blob/main/tests/unit/test_abuse_case_path_traversal.py).  
+Threats:  
+- Conceptual drift in core definitions.  
+- LLM overreach beyond regulator bounds.  
+- Performance regression under load.  
+- Reviewer misinterpretation of claims.  
+Abuse cases:  
+- Path traversal via candidate IDs.  
+- Crafted sequence inputs to bypass validation.  
+- Unauthorized resume requests for stale runs.  
+Resource risks:  
+- Large batch runs exhaust disk.  
+- Oversized sequences exhaust memory.  
+- High-rate API requests saturate CPU.  
+Assumptions:  
+- Local filesystem permissions prevent cross-tenant access.  
+- Providers return deterministic results for fixed inputs.  
+- CI artifacts are not tampered with between steps.  

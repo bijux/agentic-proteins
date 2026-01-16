@@ -1,32 +1,46 @@
-# Changelog
-<a id="top"></a>
+# Changelog  
+<a id="top"></a>  
 
-All notable changes to **agentic-proteins** are documented here.
-This project adheres to [Semantic Versioning](https://semver.org) and the
-[Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
+All notable changes to **agentic-proteins** are documented here.  
+This project adheres to [Semantic Versioning](https://semver.org) and the  
+[Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.  
 
-<a id="unreleased"></a>
-## [Unreleased]
+<a id="unreleased"></a>  
+## [Unreleased]  
 
-<!-- unreleased start -->
-### Added
-* (add new entries via fragments in `changelog.d/`)
+<!-- unreleased start -->  
+### Added  
+* (add new entries via fragments in `changelog.d/`)  
 
-### Changed
-* (add here)
+### Changed  
+* (add here)  
 
-### Fixed
-* (add here)
-<!-- unreleased end -->
+### Fixed  
+* (add here)  
+<!-- unreleased end -->  
 
-[Back to top](#top)
+[Back to top](#top)  
 
----
+---  
 
-<!-- release start -->
-<a id="v0-1-0"></a>
+<!-- release start -->  
+<a id="v0-2-0"></a>  
 
-## [0.1.0]
+## [0.2.0]  
+
+### Added  
+- Architecture invariants, threat model skeleton, and design debt ledger.  
+- Reproducible runs via `agentic-proteins reproduce <run_id>` with hash checks.  
+- Determinism tests, artifact immutability tests, and invariant regression coverage.  
+- Provider isolation checks and chaos failure test for mid-run provider loss.  
+- Benchmark regression gate and per-module coverage floors in CI.  
+- Documentation system contracts, lint gates, and CLI surface audit coverage.  
+- API error taxonomy enforcement, correlation ID logging test, and OpenAPI drift guard.  
+- Dependency allowlist enforcement for SBOM changes.  
+
+<a id="v0-1-0"></a>  
+
+## [0.1.0]  
 
 ### Added
 - Deterministic, artifact-first execution engine with explicit run directories and state snapshots.

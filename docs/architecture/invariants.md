@@ -1,31 +1,40 @@
-# invariants
+# invariants  
 
-**Scope:** Architectural invariants.
-**Audience:** Contributors.
-**Guarantees:** Invariants map to tests.
-**Non-Goals:** Rationale narrative.
+**Scope:** Architectural invariants.  
+**Audience:** Contributors.  
+**Guarantees:** Invariants map to tests.  
+**Non-Goals:** Rationale narrative.  
+Why: This doc exists to record its single responsibility for review.  
 
-## Overview
-Why: Provide the invariant set that gates changes.
+## Overview  
+This doc defines one responsibility.  
+Architecture components are defined in [architecture.md](architecture.md).  
+Read [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md) before edits.  
+Read [../../meta/TRIAGE.md](../meta/TRIAGE.md) for context.  
 
-## Contracts
-- Determinism: identical inputs and seeds yield identical outputs.
-- State transitions: lifecycle states change only via allowed transitions.
-- Artifact immutability: artifacts are content-addressed.
-- Provider boundary: runs invoke only selected providers.
-- Failure containment: failures emit error artifacts without partial tool outputs.
+## Contracts  
+Each statement is a contract.  
+Contracts align with [tests/regression/test_architecture_invariants.py](https://github.com/bijux/agentic-proteins/blob/main/tests/regression/test_architecture_invariants.py).  
+Contracts link to [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md) and [../../meta/TRIAGE.md](../meta/TRIAGE.md).  
 
-## Invariants
-- Invariant tests pass in CI.
+## Invariants  
+Invariants describe stable behavior.  
+Checks align with [tests/regression/test_architecture_invariants.py](https://github.com/bijux/agentic-proteins/blob/main/tests/regression/test_architecture_invariants.py).  
+Invariants align with [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
 
-## Failure Modes
-- Violations fail tests.
+## Failure Modes  
+Failures are explicit and tested.  
+Failure coverage aligns with [tests/regression/test_architecture_invariants.py](https://github.com/bijux/agentic-proteins/blob/main/tests/regression/test_architecture_invariants.py).  
+Failures align with [../../meta/TRIAGE.md](../meta/TRIAGE.md).  
 
-## Extension Points
-- Add invariants with matching tests.
+## Extension Points  
+Extensions require tests and docs.  
+Extensions are tracked in [../../meta/DOCS_STYLE.md](../meta/DOCS_STYLE.md).  
+Extensions align with [tests/regression/test_architecture_invariants.py](https://github.com/bijux/agentic-proteins/blob/main/tests/regression/test_architecture_invariants.py).  
 
-## Exit Criteria
-- Obsolete when invariants move to code metadata.
-- Replacement: invariants registry.
+## Exit Criteria  
+This doc becomes obsolete when the surface ends.  
+The replacement is linked in [../../meta/TRIAGE.md](../meta/TRIAGE.md).  
+Obsolete docs are removed.  
 
-Code refs: tests/regression/test_architecture_invariants.py, src/agentic_proteins/runtime/control/state_machine.py.
+Code refs: [tests/regression/test_architecture_invariants.py](https://github.com/bijux/agentic-proteins/blob/main/tests/regression/test_architecture_invariants.py).  
